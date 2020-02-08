@@ -15,13 +15,60 @@ function getToken() {
     url: "https://api.petfinder.com/v2/oauth2/token",
     method: "POST",
     data: dataString
-  })
+  });
 }
+
+let queryString = "";
+let grabOptions = $(".option");
+
+grabOptions.on("click", el => {
+  let grabValue = el.target.value;
+  if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
+    queryString = queryString.concat(`&type=${grabValue}`);
+    console.log(queryString);
+  } else if (
+    el.currentTarget.checked == true &&
+    el.currentTarget.name == "size"
+  ) {
+    queryString = queryString.concat(`&size=${grabValue}`);
+    console.log(queryString);
+  } else if (
+    el.currentTarget.checked == true &&
+    el.currentTarget.name == "age"
+  ) {
+    queryString = queryString.concat(`&age=${grabValue}`);
+    console.log(queryString);
+  } else if (
+    el.currentTarget.checked == true &&
+    el.currentTarget.name == "good_with_children"
+  ) {
+    queryString = queryString.concat(`&good_with_children=${true}`);
+    console.log(queryString);
+  }
+  if (
+    el.currentTarget.checked == true &&
+    el.currentTarget.name == "good_with_dogs"
+  ) {
+    queryString = queryString.concat(`&good_with_dogs=${true}`);
+    console.log(queryString);
+  }
+  if (
+    el.currentTarget.checked == true &&
+    el.currentTarget.name == "good_with_cats"
+  ) {
+    queryString = queryString.concat(`&good_with_cats=${true}`);
+    console.log(queryString);
+  }
+});
+
+$("#search-pet").on("click", function() {
+  $("#form").hide();
+});
 
 //questions = true or false
 //true add to the query string
 
-
+/*
 function buildQueryString() {
   queryString = ""
   if (confirm("dog")) {
@@ -53,37 +100,32 @@ function buildQueryString() {
   }
   //console.log(queryString)
   return queryString;
-}
+}*/
 
-
-
-  //console.log(petResponse);
-  // image1 = petResponse.animals[0].photos[0].small;
-  // console.log(image1)
-
+//console.log(petResponse);
+// image1 = petResponse.animals[0].photos[0].small;
+// console.log(image1)
 
 function petRequest(token) {
-  let query = buildQueryString()
-  return getToken().then (function(response) {
+  let query = buildQueryString();
+  return getToken().then(function(response) {
     return $.ajax({
       headers: {
         Authorization: `Bearer ${response.access_token}`
       },
       method: "GET",
       url: `https://api.petfinder.com/v2/animals/?${query}`
-    })
-  })
-
+    });
+  });
 }
 
 function handlePetData() {
   petRequest().then(function(response) {
-    console.log(response)
-    photo1= response.animals[0].photos[0].small
-    photo2= response.animals[0].photos[0].large
-    console.log(photo2)
-  })
-
+    console.log(response);
+    photo1 = response.animals[0].photos[0].small;
+    photo2 = response.animals[0].photos[0].large;
+    console.log(photo2);
+  });
 }
 
-handlePetData()
+handlePetData();

@@ -1,51 +1,44 @@
 .navLogo {
-    height: 50px;
-    border-radius: 50%;
-    margin-top: 8px;
-    margin-left: 8px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: 8px;
+  margin-left: 8px;
 }
 
 .nav-wrapper {
-    background-color: #EB9605;
-    font-family: 'Ropa Sans', sans-serif;
+  background-color: #eb9605;
+  font-family: "Ropa Sans", sans-serif;
 }
 
 body {
-    background-color: #431c53;
+  background-color: #431c53;
 }
 
 .responsive-img {
-    width: 80%;
-    padding: 10%;
+  width: 80%;
+  padding: 10%;
 }
 
 .questions {
-    color: white;
+  color: white;
 }
 
 .btn {
-    background-color:#EB9605;
-    animation-delay: 2s;
-    font-family: 'Odibee Sans', cursive
-
-}
-
-.survey {
-    display: none;
+  background-color: #eb9605;
+  animation-delay: 2s;
+  font-family: "Odibee Sans", cursive;
 }
 
 .navbar-fixed {
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .mainLogo {
-    
-    margin-top: 50%;
-  }
+  margin-top: 50%;
+}
 
 /* 
 font-family: 'Abel', sans-serif;
