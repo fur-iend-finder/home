@@ -1,44 +1,63 @@
-.navLogo {
-  height: 50px;
-  border-radius: 50%;
-  margin-top: 8px;
-  margin-left: 8px;
-}
-
 .nav-wrapper {
-  background-color: #eb9605;
-  font-family: "Ropa Sans", sans-serif;
+    background-color: #EB9605;
+    font-family: 'Ropa Sans', sans-serif;
 }
 
 body {
-  background-color: #431c53;
+    background-color: #431c53;
 }
 
-.responsive-img {
-  width: 80%;
-  padding: 10%;
+.responsiveImg {
+    
+    width: 80vh;
+    padding: 5%;
+
+}
+
+
+.mainLogo {
+    max-height: 550px;
+    margin: auto;
 }
 
 .questions {
-  color: white;
+    color: white;
 }
 
 .btn {
-  background-color: #eb9605;
-  animation-delay: 2s;
-  font-family: "Odibee Sans", cursive;
+    background-color:#EB9605;
+    animation-delay: 2s;
+    font-family: 'Odibee Sans', cursive
+
 }
 
-.navbar-fixed {
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
 }
 
-.mainLogo {
-  margin-top: 50%;
+
+nav ul a {
+    padding: 10px;
 }
+
+
+@media only screen and (min-width: 501px) {
+.mobileNav {
+    display: none;
+}
+}
+
+@media only screen and (max-width: 500px) {
+    .desktopNav {
+      display: none}
+  .movileNav {
+  display: block}
+    }
 
 /* 
 font-family: 'Abel', sans-serif;
