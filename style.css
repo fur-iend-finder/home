@@ -1,0 +1,55 @@
+.navLogo {
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.nav-wrapper {
+    background-color: #EB9605;
+    font-family: 'Ropa Sans', sans-serif;
+}
+
+body {
+    background-color: #431c53;
+}
+
+.responsive-img {
+    width: 80%;
+    padding: 10%;
+}
+
+.questions {
+    color: white;
+}
+
+.btn {
+    background-color:#EB9605;
+    animation-delay: 2s;
+    font-family: 'Odibee Sans', cursive
+
+}
+
+.survey {
+    display: none;
+}
+
+.navbar-fixed {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
+
+.mainLogo {
+    
+    margin-top: 50%;
+  }
+
+/* 
+font-family: 'Abel', sans-serif;
+font-family: 'Ropa Sans', sans-serif;
+font-family: 'Odibee Sans', cursive;
+font-family: 'Pontano Sans', sans-serif; 
+*/
