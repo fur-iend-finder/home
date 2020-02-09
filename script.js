@@ -1,3 +1,21 @@
+// ---------------------- DOCUMENT READY ----------------------
+$(document).ready(function() {
+  $("#form-wrapper").hide();
+});
+
+// ---------------------- START SURVEY ON CLICK ----------------------
+$("#surveyBtn").on("click", function() {
+  $("#main-logo-wrapper").hide();
+  $("#form-wrapper").show();
+});
+
+// ---------------------- SUBMIT SURVEY ON CLICK ----------------------
+$("#submit").on("click", function() {
+  $("#survey").hide();
+  handlePetData();
+});
+
+// ---------------------- API CALL ----------------------
 petFinderAPI = "6gXqqaCV4rGHQFlZapWU444NSW4gmFlZDUnK9TYKUoBf0r2WPg";
 petFinderSecret = "Js4RQQVKwJyrmKglhelMQX9yiNDSqZ6b4c1p8hMS";
 petFinderToken =
@@ -9,83 +27,6 @@ petFinderToken =
 //   }).then(function(response) {
 
 var dataString = `grant_type=client_credentials&client_id=${petFinderAPI}&client_secret=${petFinderSecret}`;
-
-function getToken() {
-  return $.ajax({
-    url: "https://api.petfinder.com/v2/oauth2/token",
-    method: "POST",
-    data: dataString
-  });
-}
-
-let grabOptions = $(".option");
-
-$("#search-pet").on("click", function() {
-  $("#form").hide();
-  handlePetData();
-});
-
-$("#submit").on("click", function() {
-  $("#survey").hide();
-});
-$("#surveyBtn").on("click", function() {
-  $("#main-logo-wrapper").hide();
-  $("#form-wrapper").show();
-});
-
-//questions = true or false
-//true add to the query string
-let queryString = "";
-
-function buildQueryString() {
-  grabOptions.on("click", el => {
-    let grabValue = el.target.value;
-    if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
-      queryString = queryString.concat(`&type=${grabValue}`);
-      console.log(queryString);
-    } else if (
-      el.currentTarget.checked == true &&
-      el.currentTarget.name == "size"
-    ) {
-      queryString = queryString.concat(`&size=${grabValue}`);
-      console.log(queryString);
-    } else if (
-      el.currentTarget.checked == true &&
-      el.currentTarget.name == "age"
-    ) {
-      queryString = queryString.concat(`&age=${grabValue}`);
-      console.log(queryString);
-    } else if (
-      el.currentTarget.checked == true &&
-      el.currentTarget.name == "good_with_children"
-    ) {
-      queryString = queryString.concat(`&good_with_children=${true}`);
-      console.log(queryString);
-    }
-    if (
-      el.currentTarget.checked == true &&
-      el.currentTarget.name == "good_with_dogs"
-    ) {
-      queryString = queryString.concat(`&good_with_dogs=${true}`);
-      console.log(queryString);
-    }
-    if (
-      el.currentTarget.checked == true &&
-      el.currentTarget.name == "good_with_cats"
-    ) {
-      queryString = queryString.concat(`&good_with_cats=${true}`);
-      console.log(queryString);
-    }
-  });
-  console.log(queryString);
-
-  return queryString;
-}
-buildQueryString();
-
-//console.log(petResponse);
-// image1 = petResponse.animals[0].photos[0].small;
-// console.log(image1)
 
 function petRequest(token) {
   let query = buildQueryString();
@@ -109,6 +50,58 @@ function handlePetData() {
   });
 }
 
-$(document).ready(function() {
-  $("#form-wrapper").hide();
-});
+function getToken() {
+  return $.ajax({
+    url: "https://api.petfinder.com/v2/oauth2/token",
+    method: "POST",
+    data: dataString
+  });
+}
+
+let queryString = "";
+let grabOptions = $(".option");
+
+// ---------------------- BUILD QUERY STRING WITH SURVEY ----------------------
+function buildQueryString() {
+  grabOptions.on("click", el => {
+    let grabValue = el.target.value;
+    if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
+      queryString = queryString.concat(`&type=${grabValue}`);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "size"
+    ) {
+      queryString = queryString.concat(`&size=${grabValue}`);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "age"
+    ) {
+      queryString = queryString.concat(`&age=${grabValue}`);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "children"
+    ) {
+      queryString = queryString.concat(`&${grabValue}=${true}`);
+    }
+    if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "good_with_dogs"
+    ) {
+      queryString = queryString.concat(`&${grabValue}=${true}`);
+    }
+    if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "good_with_cats"
+    ) {
+      queryString = queryString.concat(`&${grabValue}=${true}`);
+    }
+  });
+  console.log(queryString);
+
+  return queryString;
+}
+buildQueryString();
+
+//console.log(petResponse);
+// image1 = petResponse.animals[0].photos[0].small;
+// console.log(image1)
