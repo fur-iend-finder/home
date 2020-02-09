@@ -1,63 +1,75 @@
 .nav-wrapper {
-    background-color: #EB9605;
-    font-family: 'Ropa Sans', sans-serif;
+  background-color: #eb9605;
+  font-family: "Ropa Sans", sans-serif;
 }
 
 body {
-    background-color: #431c53;
+  background-color: #431c53;
 }
 
 .responsiveImg {
-    
-    width: 80vh;
-    padding: 5%;
-
+  width: 80vh;
+  padding: 5%;
 }
 
-
 .mainLogo {
-    max-height: 550px;
-    margin: auto;
+  max-height: 550px;
+  margin: auto;
 }
 
 .questions {
-    color: white;
+  color: white;
 }
 
 .btn {
-    background-color:#EB9605;
-    animation-delay: 2s;
-    font-family: 'Odibee Sans', cursive
-
+  background-color: #eb9605;
+  animation-delay: 2s;
+  font-family: "Odibee Sans", cursive;
 }
 
+#form-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#questions-columns {
+  display: flex;
+  flex: row;
+}
+#questions-columns > div {
+  padding: 15px;
+}
+#submit-wrapper {
+  margin-left: 15px;
+}
 
 .navbar {
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
-
 
 nav ul a {
-    padding: 10px;
+  padding: 10px;
 }
-
 
 @media only screen and (min-width: 501px) {
-.mobileNav {
+  .mobileNav {
     display: none;
-}
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .desktopNav {
-      display: none}
+  .desktopNav {
+    display: none;
+  }
   .movileNav {
-  display: block}
-    }
+    display: block;
+  }
+}
 
 /* 
 font-family: 'Abel', sans-serif;

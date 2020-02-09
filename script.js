@@ -18,89 +18,70 @@ function getToken() {
   });
 }
 
-let queryString = "";
 let grabOptions = $(".option");
-
-grabOptions.on("click", el => {
-  let grabValue = el.target.value;
-  if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
-    queryString = queryString.concat(`&type=${grabValue}`);
-    console.log(queryString);
-  } else if (
-    el.currentTarget.checked == true &&
-    el.currentTarget.name == "size"
-  ) {
-    queryString = queryString.concat(`&size=${grabValue}`);
-    console.log(queryString);
-  } else if (
-    el.currentTarget.checked == true &&
-    el.currentTarget.name == "age"
-  ) {
-    queryString = queryString.concat(`&age=${grabValue}`);
-    console.log(queryString);
-  } else if (
-    el.currentTarget.checked == true &&
-    el.currentTarget.name == "good_with_children"
-  ) {
-    queryString = queryString.concat(`&good_with_children=${true}`);
-    console.log(queryString);
-  }
-  if (
-    el.currentTarget.checked == true &&
-    el.currentTarget.name == "good_with_dogs"
-  ) {
-    queryString = queryString.concat(`&good_with_dogs=${true}`);
-    console.log(queryString);
-  }
-  if (
-    el.currentTarget.checked == true &&
-    el.currentTarget.name == "good_with_cats"
-  ) {
-    queryString = queryString.concat(`&good_with_cats=${true}`);
-    console.log(queryString);
-  }
-});
 
 $("#search-pet").on("click", function() {
   $("#form").hide();
+  handlePetData();
+});
+
+$("#submit").on("click", function() {
+  $("#survey").hide();
+});
+$("#surveyBtn").on("click", function() {
+  $("#main-logo-wrapper").hide();
+  $("#form-wrapper").show();
 });
 
 //questions = true or false
 //true add to the query string
+let queryString = "";
 
-/*
 function buildQueryString() {
-  queryString = ""
-  if (confirm("dog")) {
-      queryString = queryString.concat("&type=dog")
-  }
-  if (confirm("cat")) {
-      queryString = queryString.concat("&type=cat")
-  }
-  if (confirm("small")) {
-      queryString = queryString.concat("&size=small,medium")
-  }
-  if (confirm("large")) {
-      queryString = queryString.concat("&size=large,xlarge")
-  }
-  if (confirm("young")) {
-      queryString = queryString.concat("&age=baby,young")
-  }
-  if (confirm("old")) {
-      queryString = queryString.concat("&age=adult,senior")
-  }
-  if (confirm("kids")) {
-      queryString = queryString.concat("&good_with_children=true")
-  }
-  if (confirm("cats")) {
-      queryString = queryString.concat("&good_with_dogs=true")
-  }
-  if (confirm("dogs")) {
-      queryString = queryString.concat("&good_with_cats=true")
-  }
-  //console.log(queryString)
+  grabOptions.on("click", el => {
+    let grabValue = el.target.value;
+    if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
+      queryString = queryString.concat(`&type=${grabValue}`);
+      console.log(queryString);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "size"
+    ) {
+      queryString = queryString.concat(`&size=${grabValue}`);
+      console.log(queryString);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "age"
+    ) {
+      queryString = queryString.concat(`&age=${grabValue}`);
+      console.log(queryString);
+    } else if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "good_with_children"
+    ) {
+      queryString = queryString.concat(`&good_with_children=${true}`);
+      console.log(queryString);
+    }
+    if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "good_with_dogs"
+    ) {
+      queryString = queryString.concat(`&good_with_dogs=${true}`);
+      console.log(queryString);
+    }
+    if (
+      el.currentTarget.checked == true &&
+      el.currentTarget.name == "good_with_cats"
+    ) {
+      queryString = queryString.concat(`&good_with_cats=${true}`);
+      console.log(queryString);
+    }
+  });
+  console.log(queryString);
+
   return queryString;
-}*/
+}
+buildQueryString();
 
 //console.log(petResponse);
 // image1 = petResponse.animals[0].photos[0].small;
@@ -122,10 +103,12 @@ function petRequest(token) {
 function handlePetData() {
   petRequest().then(function(response) {
     console.log(response);
-    photo1 = response.animals[0].photos[0].small;
-    photo2 = response.animals[0].photos[0].large;
+    // photo1 = response.animals[0].photos[0].small;
+    // photo2 = response.animals[0].photos[0].large;
     console.log(photo2);
   });
 }
 
-handlePetData();
+$(document).ready(function() {
+  $("#form-wrapper").hide();
+});

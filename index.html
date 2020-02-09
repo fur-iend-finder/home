@@ -1,117 +1,158 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Furiend Finder</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abel|Odibee+Sans|Pontano+Sans|Ropa+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <title>Furiend Finder</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Abel|Odibee+Sans|Pontano+Sans|Ropa+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <!--how can i get the navbar to the bottom?-->
+    <div class="navbar center">
+      <nav>
+        <div class="nav-wrapper">
+          <ul class="desktopNav">
+            <li><a href="index.html" class="fas fa-paw"> Home</a></li>
+            <li>
+              <a href="potential.html" class="fas fa-list">
+                Potential Matches</a
+              >
+            </li>
+            <li>
+              <a href="schedule.html" class="fas fa-calendar-check">
+                Schedule a Meetup!</a
+              >
+            </li>
+          </ul>
+          <!--can not get the links to pop up after clicking the hamburger icon-->
+          <!--tried the list inside and out of nav div-->
+          <ul class="mobileNav">
+            <li><a href="index.html" class="fas fa-paw"></a></li>
+            <li><a href="potential.html" class="fas fa-list"></a></li>
+            <li><a href="schedule.html" class="fas fa-calendar-check"></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
-<body>
-  <!--how can i get the navbar to the bottom?-->
-  <div class="navbar center">
-    <nav>
-      <div class="nav-wrapper">
-        <ul class="desktopNav">
-          <li><a href="index.html" class="fas fa-paw"> Home</a></li>
-          <li><a href="potential.html" class="fas fa-list"> Potential Matches</a></li>
-          <li><a href="schedule.html" class="fas fa-calendar-check"> Schedule a Meetup!</a></li>
-        </ul>
-        <!--can not get the links to pop up after clicking the hamburger icon-->
-        <!--tried the list inside and out of nav div-->
-        <ul class="mobileNav">
-          <li><a href="index.html" class="fas fa-paw"></a></li>
-          <li><a href="potential.html" class="fas fa-list"></a></li>
-          <li><a href="schedule.html" class="fas fa-calendar-check"></a></li>
-        </ul>
+    <div id="main-logo-wrapper">
+      <div class="mainLogo center-align col">
+        <img
+          src="furiendfinderlogos/WhiteFull4x.png"
+          class="responsiveImg img animated flipInX"
+        />
       </div>
-    </nav>
-  </div>
+      <div class="center-align">
+        <button
+          class="btn waves-effect waves-light animated lightSpeedIn"
+          type="button"
+          id="surveyBtn"
+        >
+          Pet Match Survey!
+        </button>
+      </div>
+    </div>
 
+    <div id="form-wrapper">
+      <form action="#" id="survey">
+        <div id="questions-columns">
+          <div>
+            <p>
+              <label>
+                <input type="checkbox" name="type" class="option" />
+                <span class="questions">Dog</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" name="type" class="option" />
+                <span class="questions">Cat</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" name="size" class="option" />
+                <span class="questions">Small</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" name="size" class="option" />
+                <span class="questions">Large</span>
+              </label>
+            </p>
 
+            <p>
+              <label>
+                <input type="checkbox" name="size" class="option" />
+                <span class="questions">Young</span>
+              </label>
+            </p>
+          </div>
+          <div>
+            <p>
+              <label>
+                <input type="checkbox" name="age" class="option" />
+                <span class="questions">Old</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input
+                  type="checkbox"
+                  name="good_with_children"
+                  class="option"
+                />
+                <span class="questions">Good with Children </span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" name="good_with_cats" class="option" />
+                <span class="questions">Good with Cats</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" name="good_with_dogs" class="option" />
+                <span class="questions">Good with Dogs</span>
+              </label>
+            </p>
+          </div>
+        </div>
+        <div id="submit-wrapper">
+          <a class="waves-effect waves-light btn" id="submit">Submit!</a>
+        </div>
+      </form>
+    </div>
 
-
-  <div class="mainLogo center-align col">
-    <img src="furiendfinderlogos/WhiteFull4x.png" class="responsiveImg img animated flipInX">
-  </div>
-  <div class="center-align">
-    <button class="btn waves-effect waves-light animated lightSpeedIn" type="button" id="surveyBtn">Pet Match Survey!</button>
-  </div>
-
-  <!--need to save users respones to local storage so the survey only needs to be completed once
-  <div class="survey center-align">
-    <form action="#">
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span class="questions">Question</span>
-        </label>
-      </p>
-
-
-    </form>
-  </div>
--->
-
-
-
-  <script src="https://code.jquery.com/jquery-3.4.1.js" 
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-  <script src="script.js"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
 </html>
