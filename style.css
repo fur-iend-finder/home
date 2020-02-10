@@ -1,0 +1,79 @@
+.nav-wrapper {
+  background-color: #eb9605;
+  font-family: "Ropa Sans", sans-serif;
+}
+
+body {
+  background-color: #431c53;
+}
+
+.responsiveImg {
+  width: 80vh;
+  padding: 5%;
+}
+
+.mainLogo {
+  max-height: 550px;
+  margin: auto;
+}
+
+.questions {
+  color: white;
+}
+
+.btn {
+  background-color: #eb9605;
+  animation-delay: 2s;
+  font-family: "Odibee Sans", cursive;
+}
+
+#form-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#questions-columns {
+  display: flex;
+  flex: row;
+}
+#questions-columns > div {
+  padding: 15px;
+}
+#submit-wrapper {
+  margin-left: 15px;
+}
+
+.navbar {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+nav ul a {
+  padding: 10px;
+}
+
+@media only screen and (min-width: 501px) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .desktopNav {
+    display: none;
+  }
+  .movileNav {
+    display: block;
+  }
+}
+
+/* 
+font-family: 'Abel', sans-serif;
+font-family: 'Ropa Sans', sans-serif;
+font-family: 'Odibee Sans', cursive;
+font-family: 'Pontano Sans', sans-serif; 
+*/

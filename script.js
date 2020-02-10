@@ -138,5 +138,6 @@ function getWikiArticle() {
       })
       .catch(function(error){console.log(error);});
 }
+buildQueryString();
 
 getWikiArticle()
