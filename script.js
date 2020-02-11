@@ -40,10 +40,28 @@ function petRequest(token) {
     });
   });
 }
+let hasPhotoArray = [];
 
 function handlePetData() {
   petRequest().then(function(response) {
-    console.log(response);
+    let grabSelection = response.animals;
+    console.log(grabSelection);
+
+    // FILTER THROUGH RESPONSE OBJECT AND GRAB ONES WITH IMAGES ONLY
+    grabSelection.forEach(function(i) {
+      if (i.photos.length > 0) {
+        hasPhotoArray.push(i);
+      }
+    });
+    console.log(hasPhotoArray);
+
+    // ---------------------- PET BUILDER FUNCTION ----------------------
+
+    function petBuilder() {
+      let grabName = grabSelection[0].name;
+      let grabImg = grabSelection[0].$("#pet-name").text(grabName);
+    }
+    petBuilder();
     // photo1 = response.animals[0].photos[0].small;
     // photo2 = response.animals[0].photos[0].large;
     //console.log(photo2);
@@ -65,9 +83,11 @@ let queryString = "";
 let grabOptions = $(".option");
 
 // ---------------------- BUILD QUERY STRING WITH SURVEY ----------------------
+
 function buildQueryString() {
   grabOptions.on("click", el => {
     let grabValue = el.target.value;
+
     if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
       queryString = queryString.concat(`&type=${grabValue}`);
     } else if (
@@ -85,14 +105,12 @@ function buildQueryString() {
       el.currentTarget.name == "children"
     ) {
       queryString = queryString.concat(`&${grabValue}=${true}`);
-    }
-    if (
+    } else if (
       el.currentTarget.checked == true &&
       el.currentTarget.name == "good_with_dogs"
     ) {
       queryString = queryString.concat(`&${grabValue}=${true}`);
-    }
-    if (
+    } else if (
       el.currentTarget.checked == true &&
       el.currentTarget.name == "good_with_cats"
     ) {
