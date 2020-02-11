@@ -40,32 +40,14 @@ function petRequest(token) {
     });
   });
 }
-let hasPhotoArray = [];
 
 function handlePetData() {
   petRequest().then(function(response) {
-    let grabSelection = response.animals;
-    console.log(grabSelection);
-
-    // FILTER THROUGH RESPONSE OBJECT AND GRAB ONES WITH IMAGES ONLY
-    grabSelection.forEach(function(i) {
-      if (i.photos.length > 0) {
-        hasPhotoArray.push(i);
-      }
-    });
-    console.log(hasPhotoArray);
-
-    // ---------------------- PET BUILDER FUNCTION ----------------------
-
-    function petBuilder() {
-      let grabName = grabSelection[0].name;
-      let grabImg = grabSelection[0].$("#pet-name").text(grabName);
-    }
-    petBuilder();
+    console.log(response);
     // photo1 = response.animals[0].photos[0].small;
     // photo2 = response.animals[0].photos[0].large;
-    //console.log(photo2);
-    breed = response.animals[0].breeds.primary;
+    console.log(photo2);
+    breed = resonse.animals[0].breeds.primary;
     console.log(breed)
     return breed
   });
@@ -83,11 +65,9 @@ let queryString = "";
 let grabOptions = $(".option");
 
 // ---------------------- BUILD QUERY STRING WITH SURVEY ----------------------
-
 function buildQueryString() {
   grabOptions.on("click", el => {
     let grabValue = el.target.value;
-
     if (el.currentTarget.checked == true && el.currentTarget.name == "type") {
       queryString = queryString.concat(`&type=${grabValue}`);
     } else if (
@@ -105,12 +85,14 @@ function buildQueryString() {
       el.currentTarget.name == "children"
     ) {
       queryString = queryString.concat(`&${grabValue}=${true}`);
-    } else if (
+    }
+    if (
       el.currentTarget.checked == true &&
       el.currentTarget.name == "good_with_dogs"
     ) {
       queryString = queryString.concat(`&${grabValue}=${true}`);
-    } else if (
+    }
+    if (
       el.currentTarget.checked == true &&
       el.currentTarget.name == "good_with_cats"
     ) {
@@ -136,7 +118,7 @@ function getWikiArticle() {
 
   var params = {
       action: "opensearch",
-      search: `${breed}`,
+      search: "siamese cat",
       limit: "5",
       namespace: "0",
       format: "json"
@@ -157,24 +139,4 @@ function getWikiArticle() {
       .catch(function(error){console.log(error);});
 }
 
-
-function initMap() {
-  var myLatLng = { lat: 40.779502, lng: -73.967857};
-
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: "Hello World!"
-  });
-}
-
-initMap();
-buildQueryString();
-getWikiArticle();
-handlePetData();
-
+getWikiArticle()
