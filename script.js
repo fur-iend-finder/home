@@ -45,6 +45,8 @@ function petRequest(token) {
 }
 
 let hasPhotoArray = [];
+let address = "";
+let latLongPosition = { lat: 40.779502, lng: -73.967857 };
 
 function handlePetData() {
   petRequest().then(function(response) {
@@ -60,14 +62,29 @@ function handlePetData() {
 
     // NEXT-PET BUTTON
     $("#next-pet").on("click", function() {
-      irreratePetArr();
+      iteratePetArr();
     });
     // START AT INDEX 0, DISPLAY, INDEX + 1
     let index = 0;
-    function irreratePetArr() {
+    function iteratePetArr() {
       $("#pet-name").text(hasPhotoArray[`${index}`].name);
       $("#pet-breed").text(hasPhotoArray[`${index}`].breeds.primary);
       $("#pet-image").attr("src", hasPhotoArray[`${index}`].photos[0].large);
+      addressString = JSON.stringify(
+          hasPhotoArray[`${index}`].contact.address.address1 +
+          " " +
+          hasPhotoArray[`${index}`].contact.address.city +
+          "," +
+          hasPhotoArray[`${index}`].contact.address.state +
+          "," +
+          hasPhotoArray[`${index}`].contact.address.postcode +
+          "," +
+          hasPhotoArray[`${index}`].contact.address.country)
+      $("#pet-address").attr("address", addressString);
+      console.log(addressString)
+      address = addressString
+      getLatLng()
+      initMap()
 
       index++;
     }
@@ -205,7 +222,7 @@ function getWikiArticle() {
 }
 
 function initMap() {
-  var myLatLng = { lat: 40.779502, lng: -73.967857 };
+  var myLatLng = latLongPosition;
 
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 10,
@@ -227,6 +244,8 @@ function getLatLng() {
     console.log(response);
     latLng = response.results[0].geometry;
     console.log(latLng);
+    latLongPosition = latLng;
+    console.log(latLongPosition)
   });
 }
 
