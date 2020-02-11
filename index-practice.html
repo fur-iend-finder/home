@@ -1,62 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
+    <style type="text/css">
+      #map_canvas {
+        width: 500px;
+        height: 500px;
+      }
+      #map {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+  </head>
 
-
-
-<body>
+  <body>
     <form action="#">
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>Red</span>
-          </label>
-        </p>
-      </form>
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="script.js"></script>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>Red</span>
+        </label>
+      </p>
+    </form>
+    <div id="map_canvas"></div>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_UmGmKvtYh_UsSCKKJMv1r4byz677eT8&callback=initMap"
+      async
+      defer
+    ></script>
+    <script type="text/javascript">
 
-</body>
+
+      //Standard google maps function
+      // function initialize() {
+      //   var myLatlng = new google.maps.LatLng(40.779502, -73.967857);
+      //   var myOptions = {
+      //     zoom: 12,
+      //     center: myLatlng,
+      //     mapTypeId: google.maps.MapTypeId.ROADMAP
+      //   };
+      //   map = new google.maps.Map(
+      //     document.getElementById("map_canvas"),
+      //     myOptions
+      //   );
+
+      //   // Function for adding a marker to the page.
+      //   function addMarker(location) {
+      //     marker = new google.maps.Marker({
+      //       position: location,
+      //       //map: map
+      //       title: "Something"
+      //     });
+      //     marker.setMap(map);
+      //   }
+
+      //   // Testing the addMarker function
+      //   function TestMarker() {
+      //     //CentralPark = new google.maps.LatLng(37.7699298, -122.4469157);
+      //     CentralPark = {lat: 37.7699298,lng: -122.4469157}
+      //     addMarker(CentralPark);
+
+      //   }
+
+      // }
+
+
+      function initMap() {
+        var myLatLng = { lat: 40.779502, lng: -73.967857};
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: "Hello World!"
+        });
+      }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

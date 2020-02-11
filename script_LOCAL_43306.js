@@ -46,8 +46,8 @@ function handlePetData() {
     console.log(response);
     // photo1 = response.animals[0].photos[0].small;
     // photo2 = response.animals[0].photos[0].large;
-    //console.log(photo2);
-    breed = response.animals[0].breeds.primary;
+    console.log(photo2);
+    breed = resonse.animals[0].breeds.primary;
     console.log(breed)
     return breed
   });
@@ -118,7 +118,7 @@ function getWikiArticle() {
 
   var params = {
       action: "opensearch",
-      search: `${breed}`,
+      search: "siamese cat",
       limit: "5",
       namespace: "0",
       format: "json"
@@ -139,24 +139,4 @@ function getWikiArticle() {
       .catch(function(error){console.log(error);});
 }
 
-
-function initMap() {
-  var myLatLng = { lat: 40.779502, lng: -73.967857};
-
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: "Hello World!"
-  });
-}
-
-initMap();
-buildQueryString();
-getWikiArticle();
-handlePetData();
-
+getWikiArticle()

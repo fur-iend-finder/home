@@ -46,10 +46,7 @@ function handlePetData() {
     console.log(response);
     // photo1 = response.animals[0].photos[0].small;
     // photo2 = response.animals[0].photos[0].large;
-    //console.log(photo2);
-    breed = response.animals[0].breeds.primary;
-    console.log(breed)
-    return breed
+    console.log(photo2);
   });
 }
 
@@ -103,60 +100,8 @@ function buildQueryString() {
 
   return queryString;
 }
-
 buildQueryString();
 
-function getBreed() {
-
-}
-
-
-//retreives wiki article
-
-function getWikiArticle() {
-  var url = "https://en.wikipedia.org/w/api.php"; 
-
-  var params = {
-      action: "opensearch",
-      search: `${breed}`,
-      limit: "5",
-      namespace: "0",
-      format: "json"
-  };
-  
-  url = url + "?origin=*";
-  Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-  
-  fetch(url)
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(response) {
-        console.log(response);
-        webAddress = response[3][0];
-        console.log(webAddress)
-      })
-      .catch(function(error){console.log(error);});
-}
-
-
-function initMap() {
-  var myLatLng = { lat: 40.779502, lng: -73.967857};
-
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: "Hello World!"
-  });
-}
-
-initMap();
-buildQueryString();
-getWikiArticle();
-handlePetData();
-
+//console.log(petResponse);
+// image1 = petResponse.animals[0].photos[0].small;
+// console.log(image1)

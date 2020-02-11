@@ -26,6 +26,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      #map {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+        <script>
+          src =
+            "https://maps.googleapis.com/maps/api/js?key=AIzaSyB_UmGmKvtYh_UsSCKKJMv1r4byz677eT8&callback=initMap";
+        </script>
   </head>
 
   <body>
@@ -82,13 +92,13 @@
             <p>
               <label>
                 <input type="checkbox" name="type" class="option" value="dog" />
-                <span class="questions">Dog</span>
+                <span class="questions">Dogs</span>
               </label>
             </p>
             <p>
               <label>
                 <input type="checkbox" name="type" class="option" value="cat" />
-                <span class="questions">Cat</span>
+                <span class="questions">Cats</span>
               </label>
             </p>
             <p>
@@ -145,7 +155,7 @@
                   class="option"
                   value="adult,senior"
                 />
-                <span class="questions">Old</span>
+                <span class="questions">Senior</span>
               </label>
             </p>
             <p>
@@ -188,6 +198,7 @@
         </div>
       </form>
     </div>
+    <div id="map"></div>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
