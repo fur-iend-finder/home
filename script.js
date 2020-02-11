@@ -26,7 +26,7 @@ petFinderToken =
 //     method: "GET"
 //   }).then(function(response) {
 
-var dataString = `grant_type=client_credentials&client_id=${petFinderAPI}&client_secret=${petFinderSecret}`;
+let dataString = `grant_type=client_credentials&client_id=${petFinderAPI}&client_secret=${petFinderSecret}`;
 
 function petRequest(token) {
   let query = buildQueryString();
@@ -40,6 +40,8 @@ function petRequest(token) {
     });
   });
 }
+
+
 let hasPhotoArray = [];
 
 function handlePetData() {
@@ -48,12 +50,21 @@ function handlePetData() {
     console.log(grabSelection);
 
     // FILTER THROUGH RESPONSE OBJECT AND GRAB ONES WITH IMAGES ONLY
-    grabSelection.forEach(function(i) {
-      if (i.photos.length > 0) {
-        hasPhotoArray.push(i);
+    grabSelection.forEach(function(petObj) {
+      if (petObj.photos.length > 0) {
+        hasPhotoArray.push();
+        //console.log(petObj.contact.address)
+        addressString = JSON.stringify((petObj.contact.address.address1 + " " + petObj.contact.address.city + "," + petObj.contact.address.state + "," + petObj.contact.address.postcode + "," + petObj.contact.address.country))
+        //console.log(addressString)
+        let $img = $("<img>").attr({
+          "data-location": addressString,
+          "src" : "",
+          "alt": "Replacement Text"
+        })
+        return $img;
       }
     });
-    console.log(hasPhotoArray);
+    //console.log(hasPhotoArray);
 
     // ---------------------- PET BUILDER FUNCTION ----------------------
 
@@ -66,8 +77,8 @@ function handlePetData() {
     // photo2 = response.animals[0].photos[0].large;
     //console.log(photo2);
     breed = response.animals[0].breeds.primary;
-    console.log(breed)
-    return breed
+    console.log(breed);
+    return breed;
   });
 }
 
@@ -124,42 +135,42 @@ function buildQueryString() {
 
 buildQueryString();
 
-function getBreed() {
-
-}
-
+function getBreed() {}
 
 //retreives wiki article
 
 function getWikiArticle() {
-  var url = "https://en.wikipedia.org/w/api.php"; 
+  var url = "https://en.wikipedia.org/w/api.php";
 
   var params = {
-      action: "opensearch",
-      search: `${breed}`,
-      limit: "5",
-      namespace: "0",
-      format: "json"
+    action: "opensearch",
+    //search: `${breed}`,
+    limit: "5",
+    namespace: "0",
+    format: "json"
   };
-  
+
   url = url + "?origin=*";
-  Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-  
+  Object.keys(params).forEach(function(key) {
+    url += "&" + key + "=" + params[key];
+  });
+
   fetch(url)
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(response) {
-        console.log(response);
-        webAddress = response[3][0];
-        console.log(webAddress)
-      })
-      .catch(function(error){console.log(error);});
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      console.log(response);
+      webAddress = response[3][0];
+      console.log(webAddress);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
 
-
 function initMap() {
-  var myLatLng = { lat: 40.779502, lng: -73.967857};
+  var myLatLng = { lat: 40.779502, lng: -73.967857 };
 
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 10,
@@ -173,8 +184,21 @@ function initMap() {
   });
 }
 
-initMap();
+
+
+function getLatLng() {
+  $.ajax({
+
+    url: `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=76ccf41f859d4c3ba1e1bebd2d7d68c6`,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    latLng = response.results[0].geometry;
+    console.log(latLng);
+  });
+}
+
+
 buildQueryString();
 getWikiArticle();
 handlePetData();
-
