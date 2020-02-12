@@ -1,102 +1,113 @@
 .nav-wrapper {
-    background-color: #eb9605;
-    font-family: "Ropa Sans", sans-serif;
+  background-color: #eb9605;
+  font-family: "Ropa Sans", sans-serif;
 }
 
 body {
-    background-color: #431c53;
+  background-color: #431c53;
 }
 
 .responsiveImg {
-    width: 80vh;
-    padding: 5%;
+  width: 80vh;
+  padding: 5%;
 }
 
 .mainLogo {
-    max-height: 550px;
-    margin: auto;
+  max-height: 550px;
+  margin: auto;
 }
 
 .questions {
-    color: white;
+  color: white;
 }
 
 .btn {
-    background-color: #eb9605;
-    animation-delay: 2s;
-    font-family: "Odibee Sans", cursive;
+  background-color: #eb9605;
+  animation-delay: 2s;
+  font-family: "Odibee Sans", cursive;
 }
 
 #form-wrapper {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#warn {
+  color: red;
+}
+#age-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#age-size > * {
+  padding: 5px 10px;
 }
 
 #questions-columns {
-    display: flex;
-    flex: row;
+  display: flex;
+  flex: row;
 }
 
-#questions-columns>div {
-    padding: 15px;
+#questions-columns > div {
+  padding: 15px;
 }
 
 #submit-wrapper {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .navbar {
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 50;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 50;
 }
 
 nav ul a {
-    padding: 10px;
+  padding: 10px;
 }
 
 @media only screen and (min-width: 501px) {
-    .mobileNav {
-        display: none;
-    }
+  .mobileNav {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .desktopNav {
-        display: none;
-    }
-    .movileNav {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-    div.#map {
-        width: 320px;
-        height: auto;
-    }
-    #pet-image {
-        margin: 10px;
-    }
+  .desktopNav {
+    display: none;
+  }
+  .movileNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  div.#map {
+    width: 320px;
+    height: auto;
+  }
+  #pet-image {
+    margin: 10px;
+  }
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #map {
-    margin: 20px auto 100px auto;
+  margin: 20px auto 100px auto;
 }
 
 .nav-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
-
 
 /* 
 font-family: 'Abel', sans-serif;
