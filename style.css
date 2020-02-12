@@ -69,7 +69,10 @@ nav ul a {
         display: none;
     }
     .movileNav {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
     }
     div.#map {
         width: 320px;
@@ -88,8 +91,7 @@ nav ul a {
     margin: 10px auto;
 }
 
-.nav-wrapper,
-.mobileNav {
+.nav-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
