@@ -2,6 +2,7 @@
 $(document).ready(function() {
   $("#form-wrapper").hide();
   $("#display-pet").hide();
+  $("#pet-image").hide();
 });
 
 // ---------------------- START SURVEY ON CLICK ----------------------
@@ -15,6 +16,7 @@ $("#submit").on("click", function() {
   $("#survey").hide();
   handlePetData();
   $("#form-wrapper").hide();
+  $("div#map").removeAttr("class");
   $("#display-pet").show();
 });
 
@@ -70,6 +72,9 @@ function handlePetData() {
     function iteratePetArr() {
       $("#pet-name").text(hasPhotoArray[`${index}`].name);
       $("#pet-breed").text(hasPhotoArray[`${index}`].breeds.primary);
+      $("#age").text(hasPhotoArray[`${index}`].age);
+      $("#size").text(hasPhotoArray[`${index}`].size);
+
       $("#pet-image").attr("src", hasPhotoArray[`${index}`].photos[0].large);
       breed = hasPhotoArray[`${index}`].breeds.primary
       addressString = JSON.stringify(
@@ -91,22 +96,6 @@ function handlePetData() {
 
       index++;
     }
-
-    // FILTER THROUGH RESPONSE OBJECT AND GRAB ONES WITH IMAGES ONLY
-
-    // ---------------------- PET BUILDER FUNCTION ----------------------
-
-    function petBuilder() {
-      let grabName = grabSelection[0].name;
-      let grabImg = grabSelection[0].$("#pet-name").text(grabName);
-    }
-    petBuilder();
-    // photo1 = response.animals[0].photos[0].small;
-    // photo2 = response.animals[0].photos[0].large;
-    //console.log(photo2);
-    breed = response.animals[0].breeds.primary;
-    console.log(breed);
-    return breed;
   });
 }
 
@@ -156,7 +145,6 @@ function buildQueryString() {
       queryString = queryString.concat(`&${grabValue}=${true}`);
     }
   });
-  console.log(queryString);
 
   return queryString;
 }

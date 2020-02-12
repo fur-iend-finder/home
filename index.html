@@ -61,8 +61,12 @@
           <!--tried the list inside and out of nav div-->
           <ul class="mobileNav">
             <li><a href="index.html" class="fas fa-paw"></a></li>
-            <li><a href="potential.html" class="fas fa-list"></a></li>
-            <li><a href="schedule.html" class="fas fa-calendar-check"></a></li>
+            <li>
+              <a href="potential.html" class="fas fa-list"></a>
+            </li>
+            <li>
+              <a href="schedule.html" class="fas fa-calendar-check"></a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -88,6 +92,7 @@
 
     <div id="form-wrapper">
       <form action="#" id="survey">
+        <p id="warn">Select only 1 species</p>
         <div id="questions-columns">
           <div>
             <p>
@@ -200,16 +205,24 @@
       </form>
     </div>
 
-    <div id="display-pet">
+    <div id="display-pet" class="center-align">
       <div id="pet-individual">
-        <h1 id="pet-name"></h1>
-        <h4 id="pet-breed"></h4>
-        <img id="pet-image" style="height: 400px; width: 600px;" />
+        <h3 id="pet-name" class="orange-text lighten-5"></h3>
+        <h6 id="pet-breed" class="white-text"></h6>
+        <div id="age-size">
+          <h6 class="white-text" id="age"></h6>
+          <h6 class="white-text" id="size"></h6>
+        </div>
+        <img
+          id="pet-image"
+          class="responsive-img"
+          style="height: 400px; width: 600px;"
+        />
       </div>
-      <button type="button" id="next-pet">Next Pet</button>
+      <a class="waves-effect waves-light btn" id="next-pet">Next Pet!</a>
     </div>
 
-    <div id="map"></div>
+    <div id="map" class="hidden"></div>
 
     <script src="script.js"></script>
     <script
