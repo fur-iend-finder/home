@@ -47,6 +47,7 @@ function petRequest(token) {
 let hasPhotoArray = [];
 let address = "";
 let latLongPosition = { lat: 40.779502, lng: -73.967857 };
+let breed = "dog";
 
 function handlePetData() {
   petRequest().then(function(response) {
@@ -70,6 +71,7 @@ function handlePetData() {
       $("#pet-name").text(hasPhotoArray[`${index}`].name);
       $("#pet-breed").text(hasPhotoArray[`${index}`].breeds.primary);
       $("#pet-image").attr("src", hasPhotoArray[`${index}`].photos[0].large);
+      breed = hasPhotoArray[`${index}`].breeds.primary
       addressString = JSON.stringify(
           hasPhotoArray[`${index}`].contact.address.address1 +
           " " +
@@ -85,38 +87,12 @@ function handlePetData() {
       address = addressString
       getLatLng()
       initMap()
+      getWikiArticle();
 
       index++;
     }
 
     // FILTER THROUGH RESPONSE OBJECT AND GRAB ONES WITH IMAGES ONLY
-    /*
-    grabSelection.forEach(function(petObj) {
-      if (petObj.photos.length > 0) {
-        hasPhotoArray.push();
-        //console.log(petObj.contact.address)
-        addressString = JSON.stringify(
-          petObj.contact.address.address1 +
-            " " +
-            petObj.contact.address.city +
-            "," +
-            petObj.contact.address.state +
-            "," +
-            petObj.contact.address.postcode +
-            "," +
-            petObj.contact.address.country
-        );
-        //console.log(addressString)
-        let $img = $("<img>").attr({
-          "data-location": addressString,
-          src: "",
-          alt: "Replacement Text"
-        });
-        return $img;
-      }
-    });
-    console.log(hasPhotoArray);
- */
 
     // ---------------------- PET BUILDER FUNCTION ----------------------
 
@@ -142,7 +118,7 @@ function getToken() {
   });
 }
 
-let queryString = "";
+let queryString = "&limit=100";
 let grabOptions = $(".option");
 
 // ---------------------- BUILD QUERY STRING WITH SURVEY ----------------------
@@ -196,7 +172,7 @@ function getWikiArticle() {
 
   var params = {
     action: "opensearch",
-    //search: `${breed}`,
+    search: `${breed}`,
     limit: "5",
     namespace: "0",
     format: "json"
@@ -225,7 +201,7 @@ function initMap() {
   var myLatLng = latLongPosition;
 
   var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
+    zoom: 8,
     center: myLatLng
   });
 
@@ -253,3 +229,4 @@ function getLatLng() {
 buildQueryString();
 getWikiArticle();
 handlePetData();*/
+
