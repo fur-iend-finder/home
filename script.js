@@ -3,9 +3,6 @@ $(document).ready(function() {
     let queryString = "&limit=100";
     let grabOptions = $(".option");
     let hasPhotoArray = [];
-    let address = "";
-    let latLongPosition = { lat: 40.779502, lng: -73.967857 };
-    let breed = "dog";
     let currentPetIndex = 0;
 
     // ---------------------- API CALL ----------------------
@@ -35,31 +32,45 @@ $(document).ready(function() {
     // START AT CURRENTPETINDEX 0, DISPLAY, INDEX + 1
 
     function irreratePetArr() {
-        $("#pet-name").text(hasPhotoArray[currentPetIndex].name);
-        $("#pet-breed").text(hasPhotoArray[currentPetIndex].breeds.primary);
-        $("#age").text(hasPhotoArray[currentPetIndex].age);
-        $("#size").text(hasPhotoArray[currentPetIndex].size);
+      let currentPet = hasPhotoArray[currentPetIndex]
+        $("#pet-name").text(currentPet.name);
+        //$("#pet-breed").text(currentPet.breeds.primary);
+        $("#age").text(currentPet.age);
+        $("#size").text(currentPet.size);
         $("#pet-image")
-            .attr("src", hasPhotoArray[currentPetIndex].photos[0].large)
-            .attr("class", hasPhotoArray[currentPetIndex].id);
-        breed = hasPhotoArray[currentPetIndex].breeds.primary;
+            .attr("src", currentPet.photos[0].large)
+            .attr("class", currentPet.id);
+        let breed = currentPet.breeds.primary;
         addressString = JSON.stringify(
-            hasPhotoArray[currentPetIndex].contact.address.address1 +
+            currentPet.contact.address.address1 +
             " " +
-            hasPhotoArray[currentPetIndex].contact.address.city +
+            currentPet.contact.address.city +
             "," +
-            hasPhotoArray[currentPetIndex].contact.address.state +
+            currentPet.contact.address.state +
             "," +
-            hasPhotoArray[currentPetIndex].contact.address.postcode +
+            currentPet.contact.address.postcode +
             "," +
-            hasPhotoArray[currentPetIndex].contact.address.country
+            currentPet.contact.address.country
         );
         $("#pet-address").attr("address", addressString);
         console.log(addressString);
         address = addressString;
-        getLatLng();
-        initMap();
-        getWikiArticle();
+        getWikiArticle(breed)
+          .then(function(breedArticle){
+            console.log(breedArticle)
+            console.log(currentPet.breeds.primary)
+            let $anchor = $("<a>")
+              .text(breed)
+              .attr("href", breedArticle)
+              .attr("target", "_blank")
+            $("#pet-breed").empty().append($anchor)
+          })
+
+        getLatLng(addressString)
+          .then(function(currentLatLng){
+            initMap(currentLatLng);
+          });
+
         currentPetIndex++;
     }
 
@@ -131,12 +142,12 @@ $(document).ready(function() {
 
     //retreives wiki article
 
-    function getWikiArticle() {
+    function getWikiArticle(currentBreed) {
         var url = "https://en.wikipedia.org/w/api.php";
 
         var params = {
             action: "opensearch",
-            //search: `${breed}`,
+            search: currentBreed,
             limit: "5",
             namespace: "0",
             format: "json"
@@ -147,46 +158,33 @@ $(document).ready(function() {
             url += "&" + key + "=" + params[key];
         });
 
-        fetch(url)
+        return $.ajax({
+          url: url,
+          method: "GET"
+        })
             .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                console.log(response);
-                webAddress = response[3][0];
-                console.log(webAddress);
+              webAddress = response[3][0];
+              console.log(webAddress)
+              return Promise.resolve(webAddress);
             })
             .catch(function(error) {
                 console.log(error);
             });
     }
 
-    function initMap() {
-        var myLatLng = latLongPosition;
 
-        var map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 8,
-            center: myLatLng
-        });
 
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: "Hello World!"
-        });
-    }
-
-    function getLatLng() {
-        $.ajax({
-            url: `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=76ccf41f859d4c3ba1e1bebd2d7d68c6`,
+    function getLatLng(currentAddress) {
+        return $.ajax({
+            url: `https://api.opencagedata.com/geocode/v1/json?q=${currentAddress}&key=76ccf41f859d4c3ba1e1bebd2d7d68c6`,
             method: "GET"
         }).then(function(response) {
             console.log(response);
-            latLng = response.results[0].geometry;
-            console.log(latLng);
-            latLongPosition = latLng;
+            latLongPosition = response.results[0].geometry;
             console.log(latLongPosition);
+            return Promise.resolve(response.results[0].geometry)
         });
+        
     }
     //-------------------------EVENTS-------------------------------------
     // ---------------------- START SURVEY ON CLICK ----------------------
@@ -215,6 +213,20 @@ $(document).ready(function() {
     buildQueryString();
 });
 
+window.initMap = function (myLatLng = {lat: -25.363, lng: 131.044}) {
+  //var myLatLng = latLongPosition;
+
+  var map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 8,
+      center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: "Hello World!"
+  });
+}
 /*
 buildQueryString();
 getWikiArticle();
