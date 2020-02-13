@@ -207,7 +207,6 @@ function getLatLng() {
   }).then(function(response) {
     console.log(response);
     latLng = response.results[0].geometry;
-    console.log(latLng);
     latLongPosition = latLng;
     console.log(latLongPosition)
   });
