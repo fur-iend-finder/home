@@ -14,7 +14,8 @@ $("#surveyBtn").on("click", function() {
 // ---------------------- SUBMIT SURVEY ON CLICK ----------------------
 $("#submit").on("click", function() {
   $("#survey").hide();
-  handlePetData();
+  //handlePetData();
+  getWikiArticle();
   $("#form-wrapper").hide();
   $("div#map").removeAttr("class");
   $("#display-pet").show();
@@ -33,7 +34,7 @@ petFinderToken =
 
 let dataString = `grant_type=client_credentials&client_id=${petFinderAPI}&client_secret=${petFinderSecret}`;
 
-function petRequest(token) {
+function petRequest() {
   let query = buildQueryString();
   return getToken().then(function(response) {
     return $.ajax({
@@ -50,6 +51,7 @@ let hasPhotoArray = [];
 let address = "";
 let latLongPosition = { lat: 40.779502, lng: -73.967857 };
 let breed = "dog";
+let wikiUrl = "";
 
 function handlePetData() {
   petRequest().then(function(response) {
@@ -71,8 +73,10 @@ function handlePetData() {
     // START AT INDEX 0, DISPLAY, INDEX + 1
     let index = 0;
     function iteratePetArr() {
+
       $("#pet-name").text(hasPhotoArray[`${index}`].name);
-      $("#pet-breed").text(hasPhotoArray[`${index}`].breeds.primary);
+      $("#pet-breed").html(`<a target="_blank" href="${wikiUrl}">${hasPhotoArray[index].breeds.primary}</a>`)
+      //$("#pet-breed").text(hasPhotoArray[`${index}`].breeds.primary);
       $("#age").text(hasPhotoArray[`${index}`].age);
       $("#size").text(hasPhotoArray[`${index}`].size);
 
@@ -178,9 +182,13 @@ function getWikiArticle() {
       return response.json();
     })
     .then(function(response) {
-      console.log(response);
-      webAddress = response[3][0];
-      console.log(webAddress);
+      //console.log(response);
+      wikiUrl = response[3][0];
+      //console.log(webAddress);
+      handlePetData();
+      
+
+
     })
     .catch(function(error) {
       console.log(error);
@@ -214,7 +222,8 @@ function getLatLng() {
   });
 }
 
-/*
-buildQueryString();
-getWikiArticle();
-handlePetData();*/
+
+// buildQueryString();
+// handlePetData();
+
+
