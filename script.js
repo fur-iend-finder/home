@@ -1,8 +1,11 @@
 // ---------------------- DOCUMENT READY ----------------------
 $(document).ready(function() {
-    let queryString = "";
+    let queryString = "&limit=100";
     let grabOptions = $(".option");
     let hasPhotoArray = [];
+    let address = "";
+    let latLongPosition = { lat: 40.779502, lng: -73.967857 };
+    let breed = "dog";
     let currentPetIndex = 0;
 
     // ---------------------- API CALL ----------------------
@@ -39,7 +42,24 @@ $(document).ready(function() {
         $("#pet-image")
             .attr("src", hasPhotoArray[currentPetIndex].photos[0].large)
             .attr("class", hasPhotoArray[currentPetIndex].id);
-
+        breed = hasPhotoArray[currentPetIndex].breeds.primary;
+        addressString = JSON.stringify(
+            hasPhotoArray[currentPetIndex].contact.address.address1 +
+            " " +
+            hasPhotoArray[currentPetIndex].contact.address.city +
+            "," +
+            hasPhotoArray[currentPetIndex].contact.address.state +
+            "," +
+            hasPhotoArray[currentPetIndex].contact.address.postcode +
+            "," +
+            hasPhotoArray[currentPetIndex].contact.address.country
+        );
+        $("#pet-address").attr("address", addressString);
+        console.log(addressString);
+        address = addressString;
+        getLatLng();
+        initMap();
+        getWikiArticle();
         currentPetIndex++;
     }
 
@@ -142,10 +162,10 @@ $(document).ready(function() {
     }
 
     function initMap() {
-        var myLatLng = { lat: 40.779502, lng: -73.967857 };
+        var myLatLng = latLongPosition;
 
         var map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 10,
+            zoom: 8,
             center: myLatLng
         });
 
@@ -164,6 +184,8 @@ $(document).ready(function() {
             console.log(response);
             latLng = response.results[0].geometry;
             console.log(latLng);
+            latLongPosition = latLng;
+            console.log(latLongPosition);
         });
     }
     //-------------------------EVENTS-------------------------------------
