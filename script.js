@@ -65,6 +65,7 @@ function handlePetData() {
 
     // NEXT-PET BUTTON
     $("#next-pet").on("click", function() {
+      $("#pet-image").show();
       iteratePetArr();
     });
     // START AT INDEX 0, DISPLAY, INDEX + 1
@@ -76,9 +77,9 @@ function handlePetData() {
       $("#size").text(hasPhotoArray[`${index}`].size);
 
       $("#pet-image").attr("src", hasPhotoArray[`${index}`].photos[0].large);
-      breed = hasPhotoArray[`${index}`].breeds.primary
+      breed = hasPhotoArray[`${index}`].breeds.primary;
       addressString = JSON.stringify(
-          hasPhotoArray[`${index}`].contact.address.address1 +
+        hasPhotoArray[`${index}`].contact.address.address1 +
           " " +
           hasPhotoArray[`${index}`].contact.address.city +
           "," +
@@ -86,12 +87,13 @@ function handlePetData() {
           "," +
           hasPhotoArray[`${index}`].contact.address.postcode +
           "," +
-          hasPhotoArray[`${index}`].contact.address.country)
+          hasPhotoArray[`${index}`].contact.address.country
+      );
       $("#pet-address").attr("address", addressString);
-      console.log(addressString)
-      address = addressString
-      getLatLng()
-      initMap()
+      console.log(addressString);
+      address = addressString;
+      getLatLng();
+      initMap();
       getWikiArticle();
 
       index++;
@@ -208,7 +210,7 @@ function getLatLng() {
     console.log(response);
     latLng = response.results[0].geometry;
     latLongPosition = latLng;
-    console.log(latLongPosition)
+    console.log(latLongPosition);
   });
 }
 
@@ -216,4 +218,3 @@ function getLatLng() {
 buildQueryString();
 getWikiArticle();
 handlePetData();*/
-
