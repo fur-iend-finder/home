@@ -1,22 +1,16 @@
 // ---------------------- DOCUMENT READY ----------------------
 $(document).ready(function() {
   let queryString = "&limit=100";
-  let grabOptions = $(".option");
   let hasPhotoArray = [];
   let currentPetIndex = 0;
 
   // ---------------------- API CALL ----------------------
   let petFinderAPI = "6gXqqaCV4rGHQFlZapWU444NSW4gmFlZDUnK9TYKUoBf0r2WPg";
   let petFinderSecret = "Js4RQQVKwJyrmKglhelMQX9yiNDSqZ6b4c1p8hMS";
-  let petFinderToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI1MDEzZTc4MDlhZmQ3MjIyNjE3MzQyMTk2NWM5YThjY2U2N2RhNjdmNmQzYzM1OWViMDdkZjFjN2IzZTYzMjRjMDc3N2E1ZWI1YWIxZTg1In0.eyJhdWQiOiI2Z1hxcWFDVjRyR0hRRmxaYXBXVTQ0NE5TVzRnbUZsWkRVbks5VFlLVW9CZjByMldQZyIsImp0aSI6IjI1MDEzZTc4MDlhZmQ3MjIyNjE3MzQyMTk2NWM5YThjY2U2N2RhNjdmNmQzYzM1OWViMDdkZjFjN2IzZTYzMjRjMDc3N2E1ZWI1YWIxZTg1IiwiaWF0IjoxNTgwOTQ2Njk4LCJuYmYiOjE1ODA5NDY2OTgsImV4cCI6MTU4MDk1MDI5OCwic3ViIjoiIiwic2NvcGVzIjpbXX0.lS7OOFQ4sYhtlB9Qbw0JvV8aXb3AiIuQb4CgPZjqvxVQAExKka3_uHbXPad2wRMX-t_P14MIYkQu9Zgwjxgl4naXu0Ka8q8buZnU8ZBVNJYk5cLa4Q2II9HiEmyW6NIaRC2TVkq96Pa3Bz16pP_0A9PgUgQVjw3TdPi8iP9eie9WwmprLsxwxxp3w980cGccYxXMEP7vz-Ky8P-V3iwqTpd-776V29DPVQXt8I7t8Z9ed3VV0w4ohw81SPSleq_TEY1gAkg3uPhEThJ9oLUvAHyfzjRauu1tDVG-ee8FAqsE8yVpwBMHOWSJS_8rb9icjmUEaE5f9aLzRhioY4bpGg";
   let dataString = `grant_type=client_credentials&client_id=${petFinderAPI}&client_secret=${petFinderSecret}`;
-  // $.ajax({
-  //     url: `https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}`,
-  //     method: "GET"
-  //   }).then(function(response) {
 
-  function petRequest(token) {
+//------------------------- REQUESTS PET DATA -------------------------------------
+  function petRequest() {
     let query = buildQueryString();
     return getToken().then(function(response) {
       return $.ajax({
@@ -30,11 +24,9 @@ $(document).ready(function() {
   }
 
   // START AT CURRENTPETINDEX 0, DISPLAY, INDEX + 1
-
   function irreratePetArr() {
     let currentPet = hasPhotoArray[currentPetIndex];
     $("#pet-name").text(currentPet.name);
-    //$("#pet-breed").text(currentPet.breeds.primary);
     $("#age").html(`Age: <span class="orange-text">${currentPet.age}</span>`);
     $("#size").html(
       `Size: <span class="orange-text">${currentPet.size}</span>`
@@ -55,11 +47,8 @@ $(document).ready(function() {
         currentPet.contact.address.country
     );
     $("#pet-address").attr("address", addressString);
-    console.log(addressString);
     address = addressString;
     getWikiArticle(breed).then(function(breedArticle) {
-      console.log(breedArticle);
-      console.log(currentPet.breeds.primary);
       let $anchor = $("<a>")
         .text(breed)
         .attr("style", "text-decoration: underline;")
@@ -70,31 +59,27 @@ $(document).ready(function() {
         .empty()
         .append($anchor);
     });
-
     getLatLng(addressString).then(function(currentLatLng) {
       initMap(currentLatLng);
     });
-
     currentPetIndex++;
   }
-
+//------------------------- PROCESSES PET DATA -------------------------------------
   function handlePetData() {
     petRequest().then(function(response) {
       let grabSelection = response.animals;
-      console.log(grabSelection);
 
       grabSelection.forEach(function(i) {
         if (i.photos.length > 0) {
           hasPhotoArray.push(i);
         }
       });
-      console.log(hasPhotoArray);
       irreratePetArr();
       $("#display-pet").show();
       $("#pet-image").show();
     });
   }
-
+//------------------------- GETS PETFINDER TOKEN -------------------------------------
   function getToken() {
     return $.ajax({
       url: "https://api.petfinder.com/v2/oauth2/token",
@@ -106,6 +91,7 @@ $(document).ready(function() {
   // ---------------------- BUILD QUERY STRING WITH SURVEY ----------------------
 
   function buildQueryString() {
+    let grabOptions = $(".option");
     grabOptions.on("click", el => {
       let grabValue = el.target.value;
 
@@ -138,13 +124,12 @@ $(document).ready(function() {
         queryString = queryString.concat(`&${grabValue}=${true}`);
       }
     });
-
     return queryString;
   }
 
   function getBreed() {}
 
-  //retreives wiki article
+  //-------------------------RETRIVES WIKI ARTICLE-------------------------------------
 
   function getWikiArticle(currentBreed) {
     var url = "https://en.wikipedia.org/w/api.php";
@@ -168,26 +153,23 @@ $(document).ready(function() {
     })
       .then(function(response) {
         webAddress = response[3][0];
-        console.log(webAddress);
         return Promise.resolve(webAddress);
       })
       .catch(function(error) {
         console.log(error);
       });
   }
-
+  //------------------------- GETS LAT/LONG OF PET -------------------------------------
   function getLatLng(currentAddress) {
     return $.ajax({
       url: `https://api.opencagedata.com/geocode/v1/json?q=${currentAddress}&key=76ccf41f859d4c3ba1e1bebd2d7d68c6`,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
       latLongPosition = response.results[0].geometry;
-      console.log(latLongPosition);
       return Promise.resolve(response.results[0].geometry);
     });
   }
-  //-------------------------EVENTS-------------------------------------
+  //------------------------- EVENTS -------------------------------------
   // ---------------------- START SURVEY ON CLICK ----------------------
   $("#surveyBtn").on("click", function() {
     $("#main-logo-wrapper").hide();
@@ -214,6 +196,7 @@ $(document).ready(function() {
   buildQueryString();
 });
 
+//------------------------- INITIALIZES MAP -------------------------------------
 window.initMap = function(myLatLng = { lat: -25.363, lng: 131.044 }) {
   //var myLatLng = latLongPosition;
 
@@ -228,7 +211,4 @@ window.initMap = function(myLatLng = { lat: -25.363, lng: 131.044 }) {
     title: "Hello World!"
   });
 };
-/*
-buildQueryString();
-getWikiArticle();
-handlePetData();*/
+
