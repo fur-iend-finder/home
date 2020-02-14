@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Furiend Finder</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Abel|Odibee+Sans|Pontano+Sans|Ropa+Sans&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abel|Odibee+Sans|Pontano+Sans|Ropa+Sans&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <style>
-        #map {
-            width: 500px;
-            height: 500px;
-        }
+      #map {
+        width: 500px;
+        height: 500px;
+      }
     </style>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-</head>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <!--how can i get the navbar to the bottom?-->
     <div class="navbar center">
-        <nav>
-            <div class="nav-wrapper">
-                <ul class="desktopNav">
-                    <li><a href="index.html" class="fas fa-paw"> Home</a></li>
-                    <li>
-                        <a id=matches href="potential.html" class="fas fa-list">
+      <nav>
+        <div class="nav-wrapper">
+          <ul class="desktopNav">
+            <li><a href="index.html" class="fas fa-paw"> Home</a></li>
+            <li>
+              <a href="potential.html" class="fas fa-list">
                 Potential Matches</a
               >
             </li>
@@ -36,46 +56,51 @@
           <!--tried the list inside and out of nav div-->
           <ul class="mobileNav">
             <li><a href="index.html" class="fas fa-paw"></a></li>
-
             <li>
               <a href="potential.html" class="fas fa-list"></a>
             </li>
           </ul>
         </div>
       </nav>
-
     </div>
 
     <div id="main-logo-wrapper">
-        <div class="mainLogo center-align col">
-            <img src="furiendfinderlogos/WhiteFull4x.png" class="responsiveImg img animated flipInX" />
-        </div>
-        <div class="center-align">
-            <button class="btn waves-effect waves-light animated lightSpeedIn" type="button" id="surveyBtn">
+      <div class="mainLogo center-align col">
+        <img
+          src="furiendfinderlogos/WhiteFull4x.png"
+          class="responsiveImg img animated flipInX"
+        />
+      </div>
+      <div class="center-align">
+        <button
+          class="btn waves-effect waves-light animated lightSpeedIn"
+          type="button"
+          id="surveyBtn"
+        >
           Pet Match Survey!
         </button>
-        </div>
+      </div>
     </div>
 
     <div id="form-wrapper">
-        <form action="#" id="survey">
-            <p id="warn">Select only 1 species</p>
-            <div id="questions-columns">
-                <div>
-                    <p>
-                        <label>
+      <form action="#" id="survey">
+        <p id="warn">Select only 1 species</p>
+        <div id="questions-columns">
+          <div>
+            <p>
+              <label>
                 <input type="checkbox" name="type" class="option" value="dog" />
                 <span class="questions">Dogs</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input type="checkbox" name="type" class="option" value="cat" />
                 <span class="questions">Cats</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="size"
@@ -84,9 +109,9 @@
                 />
                 <span class="questions">Small</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="size"
@@ -95,9 +120,9 @@
                 />
                 <span class="questions">Medium</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="size"
@@ -106,9 +131,9 @@
                 />
                 <span class="questions">Large</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="age"
@@ -117,11 +142,11 @@
                 />
                 <span class="questions">Young</span>
               </label>
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        <label>
+            </p>
+          </div>
+          <div>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="age"
@@ -130,9 +155,9 @@
                 />
                 <span class="questions">Senior</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="children"
@@ -141,9 +166,9 @@
                 />
                 <span class="questions">Good with Children </span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="good_with_cats"
@@ -152,9 +177,9 @@
                 />
                 <span class="questions">Good with Cats</span>
               </label>
-                    </p>
-                    <p>
-                        <label>
+            </p>
+            <p>
+              <label>
                 <input
                   type="checkbox"
                   name="good_with_dogs"
@@ -163,27 +188,28 @@
                 />
                 <span class="questions">Good with Dogs</span>
               </label>
-                    </p>
-                </div>
-            </div>
-            <div id="submit-wrapper">
-                <a class="waves-effect waves-light btn" id="submit">Submit!</a>
-            </div>
-        </form>
+            </p>
+          </div>
+        </div>
+        <div id="submit-wrapper">
+          <a class="waves-effect waves-light btn" id="submit">Submit!</a>
+        </div>
+      </form>
     </div>
 
     <div id="display-pet" class="center-align">
-        <div id="pet-individual">
-            <h3 id="pet-name" class="orange-text lighten-5"></h3>
-            <h6 id="pet-breed" class="white-text"></h6>
-            <div id="age-size">
-                <h6 class="white-text" id="age"></h6>
-                <h6 class="white-text" id="size"></h6>
-            </div>
-            <div id="next-pet">
-                <a class="waves-effect waves-light btn" id="like">Like Pet!</a>
-                <a class="waves-effect waves-light btn" id="dislike">Dislike Pet!</a
+      <div id="pet-individual">
+        <h3 id="pet-name" class="orange-text lighten-5"></h3>
+        <h6 id="pet-breed" class="white-text"></h6>
+        <div id="age-size">
+          <h6 class="white-text" id="age"></h6>
+          <h6 class="white-text" id="size"></h6>
+        </div>
+        <div id="next-pet">
+          <a class="waves-effect waves-light btn" class="dislike"
+            >Dislike Pet!</a
           >
+          <a class="waves-effect waves-light btn" class="like">Like Pet!</a>
         </div>
         <img id="pet-image" class="responsive-img" />
       </div>
