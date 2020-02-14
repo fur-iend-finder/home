@@ -88,7 +88,7 @@ nav ul a {
     .desktopNav {
         display: none;
     }
-    .movileNav {
+    .mobileNav {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
@@ -99,6 +99,9 @@ nav ul a {
     }
     #pet-image {
         margin: 10px;
+    }
+    #main-logo-wrapper {
+        position: absolute;
     }
 }
 
