@@ -3,6 +3,7 @@ $(document).ready(function() {
     let queryString = "&limit=100";
     let hasPhotoArray = [];
     let currentPetIndex = 0;
+    matchesArr = [];
 
     // ---------------------- API CALL ----------------------
     let petFinderAPI = "6gXqqaCV4rGHQFlZapWU444NSW4gmFlZDUnK9TYKUoBf0r2WPg";
@@ -26,15 +27,29 @@ $(document).ready(function() {
     // START AT CURRENTPETINDEX 0, DISPLAY, INDEX + 1
     function irreratePetArr() {
         let currentPet = hasPhotoArray[currentPetIndex];
-        $("#pet-name").text(currentPet.name);
-        $("#age").html(`Age: <span class="orange-text">${currentPet.age}</span>`);
+        let name = currentPet.name
+        let age = currentPet.size
+        let size = currentPet.size
+        let image = currentPet.photos[0].large
+        let id = currentPet.id
+        let breed = currentPet.breeds.primary;
+        $("#pet-individual")
+            .attr({
+                "data-id": id,
+                "data-name": name,
+                "data-age": age,
+                "data-size": size,
+                "data-img": image,
+                "data-breed": breed
+            })
+        $("#pet-name").text(name);
+        $("#age").html(`Age: <span class="orange-text">${age}</span>`);
         $("#size").html(
-            `Size: <span class="orange-text">${currentPet.size}</span>`
+            `Size: <span class="orange-text">${size}</span>`
         );
         $("#pet-image")
-            .attr("src", currentPet.photos[0].large)
-            .attr("class", currentPet.id);
-        let breed = currentPet.breeds.primary;
+            .attr("src", image);
+
         addressString = JSON.stringify(
             currentPet.contact.address.address1 +
             " " +
@@ -188,6 +203,50 @@ $(document).ready(function() {
     $("#next-pet").on("click", function() {
         irreratePetArr();
     });
+
+    // --------------------- LIKE-PET BUTTON---------------------------------
+    $("#like").on("click", function() {
+
+        console.log($(this).parent().parent().attr("data-id"));
+        let name = $(this).parent().parent().attr("data-name");
+        let size = $(this).parent().parent().attr("data-size");
+        let breed = $(this).parent().parent().attr("data-breed");
+        let age = $(this).parent().parent().attr("data-age");
+        let image = $(this).parent().parent().attr("data-img");
+        let matchID = $(this).parent().parent().attr("data-id");
+
+        let petData = {
+            "name": name,
+            "breed": breed,
+            "image": image,
+            "size": size,
+            "age": age
+        };
+
+        localStorage.setItem(matchID, JSON.stringify(petData))
+
+        matchesArr.push(matchID);
+        localStorage.setItem("matches", JSON.stringify(matchesArr))
+
+    });
+
+    // -----------------------MATCH BUTTON----------------------------------
+    $("#matches").on("click", function() {
+        let currentMatches = JSON.parse(localStorage.getItem("matches"))
+
+        console.log(currentMatches);
+
+        for (var i = 0; i < currentMatches.length; i++) {
+            console.log(JSON.parse(localStorage.getItem(currentMatches[i])))
+        }
+
+
+        $("#form-wrapper").hide();
+        $("#display-pet").hide();
+        $("#pet-image").hide();
+    })
+
+
     //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
     $("#display-pet").hide();
