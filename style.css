@@ -93,7 +93,7 @@ nav ul a {
         flex-direction: row;
         justify-content: space-evenly;
     }
-    div#map {
+    #map {
         width: 320px;
         height: auto;
     }
