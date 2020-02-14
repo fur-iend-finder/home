@@ -27,13 +27,8 @@
                 <ul class="desktopNav">
                     <li><a href="index.html" class="fas fa-paw"> Home</a></li>
                     <li>
-                        <a id=matches href="potential.html" class="fas fa-list">
+                        <a href="potential.html" class="fas fa-list">
                 Potential Matches</a
-              >
-            </li>
-            <li>
-              <a href="schedule.html" class="fas fa-calendar-check">
-                Schedule a Meetup!</a
               >
             </li>
           </ul>
@@ -43,9 +38,6 @@
             <li><a href="index.html" class="fas fa-paw"></a></li>
                     <li>
                         <a href="potential.html" class="fas fa-list"></a>
-                    </li>
-                    <li>
-                        <a href="schedule.html" class="fas fa-calendar-check"></a>
                     </li>
                 </ul>
             </div>
@@ -187,23 +179,20 @@
                 <h6 class="white-text" id="size"></h6>
             </div>
             <div id="next-pet">
-                <a class="waves-effect waves-light btn" id="like">Like Pet!</a>
-                <a class="waves-effect waves-light btn" id="dislike">Dislike Pet!</a
+                <a class="waves-effect waves-light btn" class="dislike">Dislike Pet!</a
           >
+          <a class="waves-effect waves-light btn" class="like">Like Pet!</a>
+            </div>
+            <img id="pet-image" class="responsive-img" />
         </div>
-        <img id="pet-image" class="responsive-img" />
-      </div>
 
-      <h4 class="white-text">Visit Pet's Shelter</h4>
+        <h4 class="white-text">Visit Pet's Shelter</h4>
     </div>
 
     <div id="map" class="hidden"></div>
 
     <script src="script.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_UmGmKvtYh_UsSCKKJMv1r4byz677eT8&callback=initMap"
-      async
-      defer
-    ></script>
-  </body>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_UmGmKvtYh_UsSCKKJMv1r4byz677eT8&callback=initMap" async defer></script>
+</body>
+
 </html>

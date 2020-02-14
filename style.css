@@ -13,8 +13,12 @@ body {
 }
 
 #pet-image {
-    width: 500px;
+    width: auto;
     height: auto;
+}
+
+#map {
+    width: 100%;
 }
 
 .mainLogo {
@@ -53,6 +57,10 @@ body {
     padding: 5px 10px;
 }
 
+#next-pet {
+    margin-bottom: 20px;
+}
+
 #questions-columns {
     display: flex;
     flex: row;
@@ -82,32 +90,40 @@ nav ul a {
     .mobileNav {
         display: none;
     }
+    #map {
+        max-width: 50%;
+        margin: 0 auto;
+        margin-bottom: 100px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
     .desktopNav {
         display: none;
     }
-    .movileNav {
+    .mobileNav {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
-    div#map {
+    #map {
         width: 320px;
         height: auto;
     }
     #pet-image {
-        margin: 10px;
+        width: 100%;
+    }
+    #map {
+        width: 100%;
+        margin-bottom: 100px;
+    }
+    #main-logo-wrapper {
+        position: absolute;
     }
 }
 
 .hidden {
     display: none;
-}
-
-#map {
-    margin: 20px auto 100px auto;
 }
 
 .nav-wrapper {
@@ -118,8 +134,8 @@ nav ul a {
 
 
 /* 
-font-family: 'Abel', sans-serif;
-font-family: 'Ropa Sans', sans-serif;
-font-family: 'Odibee Sans', cursive;
-font-family: 'Pontano Sans', sans-serif; 
-*/
+  font-family: 'Abel', sans-serif;
+  font-family: 'Ropa Sans', sans-serif;
+  font-family: 'Odibee Sans', cursive;
+  font-family: 'Pontano Sans', sans-serif; 
+  */
