@@ -127,24 +127,64 @@ $(document).ready(function() {
     return queryString;
   }
 
-  function getBreed() {}
+    function getBreed() {}
 
   //-------------------------RETRIVES WIKI ARTICLE-------------------------------------
 
-  function getWikiArticle(currentBreed) {
-    var url = "https://en.wikipedia.org/w/api.php";
+    function getWikiArticle(currentBreed) {
+        var url = "https://en.wikipedia.org/w/api.php";
 
-    var params = {
-      action: "opensearch",
-      search: currentBreed,
-      limit: "5",
-      namespace: "0",
-      format: "json"
-    };
+        var params = {
+            action: "opensearch",
+            search: currentBreed,
+            limit: "5",
+            namespace: "0",
+            format: "json"
+        };
 
-    url = url + "?origin=*";
-    Object.keys(params).forEach(function(key) {
-      url += "&" + key + "=" + params[key];
+        url = url + "?origin=*";
+        Object.keys(params).forEach(function(key) {
+            url += "&" + key + "=" + params[key];
+        });
+
+        return $.ajax({
+                url: url,
+                method: "GET"
+            })
+            .then(function(response) {
+                webAddress = response[3][0];
+                console.log(webAddress);
+                return Promise.resolve(webAddress);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    function getLatLng(currentAddress) {
+        return $.ajax({
+            url: `https://api.opencagedata.com/geocode/v1/json?q=${currentAddress}&key=76ccf41f859d4c3ba1e1bebd2d7d68c6`,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+            latLongPosition = response.results[0].geometry;
+            console.log(latLongPosition);
+            return Promise.resolve(response.results[0].geometry);
+        });
+    }
+    //-------------------------EVENTS-------------------------------------
+    // ---------------------- START SURVEY ON CLICK ----------------------
+    $("#surveyBtn").on("click", function() {
+        $("#main-logo-wrapper").hide();
+        $("#form-wrapper").show();
+    });
+
+    // ---------------------- SUBMIT SURVEY ON CLICK ----------------------
+    $("#submit").on("click", function() {
+        $("#survey").hide();
+        handlePetData();
+        $("#form-wrapper").hide();
+        $("div#map").removeAttr("class");
     });
 
     return $.ajax({
@@ -180,35 +220,57 @@ $(document).ready(function() {
   $("#submit").on("click", function() {
     $("#survey").hide();
     handlePetData();
+    // --------------------- NEXT-PET BUTTON--------------------------------
+    $("#next-pet").on("click", function() {
+        irreratePetArr();
+    });
+
+    $("#like").on("click", function() {
+        console.log($(this).parent().parent().attr("data-id"));
+        let name = $(this).parent().parent().attr("data-name");
+        let size = $(this).parent().parent().attr("data-size");
+        let breed = $(this).parent().parent().attr("data-breed");
+        let age = $(this).parent().parent().attr("data-age");
+        let image = $(this).parent().parent().attr("data-img");
+        let matchID = $(this).parent().parent().attr("data-id")
+        let petData = {
+            "name": name,
+            "breed": breed,
+            "image": image,
+            "size": size,
+            "age": age
+        };
+
+        localStorage.setItem(matchID, JSON.stringify(petData))
+
+        ;
+        matchesArr.push(matchID);
+        localStorage.setItem("matches", JSON.stringify(matchesArr))
+    });
+
+    $("#matches").on("click", function() {
+            console.log(JSON.parse(localStorage.getItem(matchesArr)));
+        })
+        //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
-    $("div#map").removeAttr("class");
-  });
+    $("#display-pet").hide();
+    $("#pet-image").hide();
 
-  // --------------------- NEXT-PET BUTTON--------------------------------
-  $("#next-pet").on("click", function() {
-    irreratePetArr();
-  });
-  //---------------------------INITIALIZE APP-----------------------------
-  $("#form-wrapper").hide();
-  $("#display-pet").hide();
-  $("#pet-image").hide();
-
-  buildQueryString();
+    buildQueryString();
 });
 
 //------------------------- INITIALIZES MAP -------------------------------------
 window.initMap = function(myLatLng = { lat: -25.363, lng: 131.044 }) {
-  //var myLatLng = latLongPosition;
+    //var myLatLng = latLongPosition;
 
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
-    center: myLatLng
-  });
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 8,
+        center: myLatLng
+    });
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: "Hello World!"
-  });
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: "Hello World!"
+    });
 };
-
