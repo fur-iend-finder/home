@@ -132,6 +132,20 @@ nav ul a {
     justify-content: space-around;
 }
 
+.collection {
+    margin: 20px 10px 60px 10px;
+}
+
+.row .col {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+img.circle {
+    height: 150px;
+    width: auto;
+}
+
 
 /* 
   font-family: 'Abel', sans-serif;
