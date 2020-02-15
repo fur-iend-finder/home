@@ -4,6 +4,8 @@ $(document).ready(function() {
     let hasPhotoArray = [];
     let currentPetIndex = 0;
     let matchesArr = JSON.parse(localStorage.getItem("matches"));
+    let storedPetData = [];
+
 
     // ---------------------- API CALL ----------------------
     let petFinderAPI = "6gXqqaCV4rGHQFlZapWU444NSW4gmFlZDUnK9TYKUoBf0r2WPg";
@@ -141,6 +143,13 @@ $(document).ready(function() {
         });
         return queryString;
     }
+    //------------------------APPEND LOCAL STORAGE--------------------------------------
+
+    function appendLocalStorage() {
+
+    }
+
+
 
     function getBreed() {}
 
@@ -199,7 +208,11 @@ $(document).ready(function() {
             title: "Pet Marker"
         });
     };
+    //------------------APPEND LOCAL STORAGE TO LIST------------------------
 
+    function appendData() {
+
+    }
     //------------------------- EVENTS -------------------------------------
     // ---------------------- START SURVEY ON CLICK ----------------------
     $("#surveyBtn").on("click", function() {
@@ -239,11 +252,13 @@ $(document).ready(function() {
         };
 
         localStorage.setItem(matchID, JSON.stringify(petData))
+            //no repeats
         if (matchesArr.includes(matchID)) {
-            //nothing happens
+            ///nothing happens
         } else {
             matchesArr.push(matchID);
         }
+
         localStorage.setItem("matches", JSON.stringify(matchesArr))
 
     });
@@ -277,17 +292,20 @@ $(document).ready(function() {
             $(`.p-size-${currentMatches[i]}`).text(storedPetData.size);
             $(`.li-${currentMatches[i]}`).append(`<p class='data-age p-age-${currentMatches[i]}'>`);
             $(`.p-age-${currentMatches[i]}`).text(storedPetData.age);
-            $(`.li-${currentMatches[i]}`).append(`<a class='secondary-content data-icon a-${currentMatches[i]}' href='#!'>`);
-            $(`.a-${currentMatches[i]}`).append(`<i class='material-icons i-${currentMatches[i]}'>`);
+            $(`.li-${currentMatches[i]}`).append(`<a class='secondary-content a-${currentMatches[i]}' href='#!'>`);
+            $(`.a-${currentMatches[i]}`).append(`<i class='material-icons cancel-icon i-${currentMatches[i]}'>`);
             $(`.i-${currentMatches[i]}`).text("cancel")
 
-
         }
-
-
-
     })
 
+
+
+
+    //--------------------------REMOVE FROM LIST-----------------------------
+    $(".cancel-icon").on("click", "i", function() {
+        console.log($(this).parent() /*.parent().attr("class")*/ )
+    })
 
     //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
