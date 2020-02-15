@@ -3,7 +3,9 @@ $(document).ready(function() {
     let queryString = "&limit=100";
     let hasPhotoArray = [];
     let currentPetIndex = 0;
-    matchesArr = [];
+    let matchesArr = [];
+    let storedPetData = [];
+
 
     // ---------------------- API CALL ----------------------
     let petFinderAPI = "6gXqqaCV4rGHQFlZapWU444NSW4gmFlZDUnK9TYKUoBf0r2WPg";
@@ -28,7 +30,7 @@ $(document).ready(function() {
     function irreratePetArr() {
         let currentPet = hasPhotoArray[currentPetIndex];
         let name = currentPet.name
-        let age = currentPet.size
+        let age = currentPet.age
         let size = currentPet.size
         let image = currentPet.photos[0].large
         let id = currentPet.id
@@ -141,6 +143,26 @@ $(document).ready(function() {
         });
         return queryString;
     }
+    //------------------------APPEND LOCAL STORAGE--------------------------------------
+
+    function appendLocalStorage() {
+        console.log(storedPetData.id)
+        $(".collection").append(`<li class="collection-item avatar li-${storedPetData.id}">`);
+        $(`.li-${storedPetData.id}`).append(`<img src='${storedPetData.image}' alt='${storedPetData.name}' class='circle'>`);
+        $(`.li-${storedPetData.id}`).append(`<span class="title span-${storedPetData.id}">`);
+        $(`.span-${storedPetData.id}`).text(storedPetData.name);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-breed p-breed-${storedPetData.id}'>`);
+        $(`.p-breed-${storedPetData.id}`).text(storedPetData.breed);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-size p-size-${storedPetData.id}'>`);
+        $(`.p-size-${storedPetData.id}`).text(storedPetData.size);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-age p-age-${storedPetData.id}'>`);
+        $(`.p-age-${storedPetData.id}`).text(storedPetData.age);
+        $(`.li-${storedPetData.id}`).append(`<a class='secondary-content data-icon a-${storedPetData.id}' href='#!'>`);
+        $(`.a-${storedPetData.id}`).append(`<i class='material-icons i-${storedPetData.id}'>`);
+        $(`.i-${storedPetData.id}`).text("cancel")
+    }
+
+
 
     function getBreed() {}
 
@@ -184,6 +206,26 @@ $(document).ready(function() {
             return Promise.resolve(response.results[0].geometry);
         });
     }
+    //------------------------- INITIALIZES MAP -------------------------------------
+    window.initMap = function(myLatLng = { lat: -25.363, lng: 131.044 }) {
+        //var myLatLng = latLongPosition;
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 8,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: "Pet Marker"
+        });
+    };
+    //------------------APPEND LOCAL STORAGE TO LIST------------------------
+
+    function appendData() {
+
+    }
     //------------------------- EVENTS -------------------------------------
     // ---------------------- START SURVEY ON CLICK ----------------------
     $("#surveyBtn").on("click", function() {
@@ -207,7 +249,6 @@ $(document).ready(function() {
     // --------------------- LIKE-PET BUTTON---------------------------------
     $("#like").on("click", function() {
 
-        console.log($(this).parent().parent().attr("data-id"));
         let name = $(this).parent().parent().attr("data-name");
         let size = $(this).parent().parent().attr("data-size");
         let breed = $(this).parent().parent().attr("data-breed");
@@ -216,6 +257,7 @@ $(document).ready(function() {
         let matchID = $(this).parent().parent().attr("data-id");
 
         let petData = {
+            "id": matchID,
             "name": name,
             "breed": breed,
             "image": image,
@@ -232,18 +274,28 @@ $(document).ready(function() {
 
     // -----------------------MATCH BUTTON----------------------------------
     $("#matches").on("click", function() {
-        let currentMatches = JSON.parse(localStorage.getItem("matches"))
+        $("#main-logo-wrapper").hide();
+        $("#form-wrapper").hide();
+        $("#display-pet").hide();
+        $("#map").hide();
+        $(".matches-list").empty();
+        $(".matches-list").append(`<ul class="collection col s12 m10 l6 offset-l3 offset-m1">`)
 
+        let currentMatches = JSON.parse(localStorage.getItem("matches"))
         console.log(currentMatches);
 
+
+
         for (var i = 0; i < currentMatches.length; i++) {
-            console.log(JSON.parse(localStorage.getItem(currentMatches[i])))
+            storedPetData = JSON.parse(localStorage.getItem(currentMatches[i]))
+            console.log(storedPetData);
+
+            appendLocalStorage();
+
         }
 
 
-        $("#form-wrapper").hide();
-        $("#display-pet").hide();
-        $("#pet-image").hide();
+
     })
 
 
@@ -254,19 +306,3 @@ $(document).ready(function() {
 
     buildQueryString();
 });
-
-//------------------------- INITIALIZES MAP -------------------------------------
-window.initMap = function(myLatLng = { lat: -25.363, lng: 131.044 }) {
-    //var myLatLng = latLongPosition;
-
-    var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: myLatLng
-    });
-
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: "Hello World!"
-    });
-};
