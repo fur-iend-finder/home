@@ -292,9 +292,9 @@ $(document).ready(function() {
             $(`.p-size-${currentMatches[i]}`).text(storedPetData.size);
             $(`.li-${currentMatches[i]}`).append(`<p class='data-age p-age-${currentMatches[i]}'>`);
             $(`.p-age-${currentMatches[i]}`).text(storedPetData.age);
-            $(`.li-${currentMatches[i]}`).append(`<a class='secondary-content a-${currentMatches[i]}' href='#!'>`);
+            /*$(`.li-${currentMatches[i]}`).append(`<a class='secondary-content a-${currentMatches[i]}' href='#!'>`);
             $(`.a-${currentMatches[i]}`).append(`<i class='material-icons cancel-icon i-${currentMatches[i]}'>`);
-            $(`.i-${currentMatches[i]}`).text("cancel")
+            $(`.i-${currentMatches[i]}`).text("cancel")*/
 
         }
     })
@@ -303,9 +303,9 @@ $(document).ready(function() {
 
 
     //--------------------------REMOVE FROM LIST-----------------------------
-    $(".cancel-icon").on("click", "i", function() {
-        console.log($(this).parent() /*.parent().attr("class")*/ )
-    })
+    /*$(".material-icons").on("click", function() {
+        console.log($(this).parent().attr("class").parent().attr("class") )
+    })*/
 
     //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
