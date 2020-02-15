@@ -3,7 +3,7 @@ $(document).ready(function() {
     let queryString = "&limit=100";
     let hasPhotoArray = [];
     let currentPetIndex = 0;
-    let matchesArr = [];
+    let matchesArr = JSON.parse(localStorage.getItem("matches"));
     let storedPetData = [];
 
 
@@ -146,20 +146,7 @@ $(document).ready(function() {
     //------------------------APPEND LOCAL STORAGE--------------------------------------
 
     function appendLocalStorage() {
-        console.log(storedPetData.id)
-        $(".collection").append(`<li class="collection-item avatar li-${storedPetData.id}">`);
-        $(`.li-${storedPetData.id}`).append(`<img src='${storedPetData.image}' alt='${storedPetData.name}' class='circle'>`);
-        $(`.li-${storedPetData.id}`).append(`<span class="title span-${storedPetData.id}">`);
-        $(`.span-${storedPetData.id}`).text(storedPetData.name);
-        $(`.li-${storedPetData.id}`).append(`<p class='data-breed p-breed-${storedPetData.id}'>`);
-        $(`.p-breed-${storedPetData.id}`).text(storedPetData.breed);
-        $(`.li-${storedPetData.id}`).append(`<p class='data-size p-size-${storedPetData.id}'>`);
-        $(`.p-size-${storedPetData.id}`).text(storedPetData.size);
-        $(`.li-${storedPetData.id}`).append(`<p class='data-age p-age-${storedPetData.id}'>`);
-        $(`.p-age-${storedPetData.id}`).text(storedPetData.age);
-        $(`.li-${storedPetData.id}`).append(`<a class='secondary-content data-icon a-${storedPetData.id}' href='#!'>`);
-        $(`.a-${storedPetData.id}`).append(`<i class='material-icons i-${storedPetData.id}'>`);
-        $(`.i-${storedPetData.id}`).text("cancel")
+
     }
 
 
@@ -257,7 +244,6 @@ $(document).ready(function() {
         let matchID = $(this).parent().parent().attr("data-id");
 
         let petData = {
-            "id": matchID,
             "name": name,
             "breed": breed,
             "image": image,
@@ -266,8 +252,13 @@ $(document).ready(function() {
         };
 
         localStorage.setItem(matchID, JSON.stringify(petData))
+            //no repeats
+        if (matchesArr.includes(matchID)) {
+            ///nothing happens
+        } else {
+            matchesArr.push(matchID);
+        }
 
-        matchesArr.push(matchID);
         localStorage.setItem("matches", JSON.stringify(matchesArr))
 
     });
@@ -290,14 +281,31 @@ $(document).ready(function() {
             storedPetData = JSON.parse(localStorage.getItem(currentMatches[i]))
             console.log(storedPetData);
 
-            appendLocalStorage();
+            console.log(currentMatches[i])
+            $(".collection").append(`<li class="collection-item avatar li-${currentMatches[i]}">`);
+            $(`.li-${currentMatches[i]}`).append(`<img src='${storedPetData.image}' alt='${storedPetData.name}' class='circle'>`);
+            $(`.li-${currentMatches[i]}`).append(`<span class="title span-${currentMatches[i]}">`);
+            $(`.span-${currentMatches[i]}`).text(storedPetData.name);
+            $(`.li-${currentMatches[i]}`).append(`<p class='data-breed p-breed-${currentMatches[i]}'>`);
+            $(`.p-breed-${currentMatches[i]}`).text(storedPetData.breed);
+            $(`.li-${currentMatches[i]}`).append(`<p class='data-size p-size-${currentMatches[i]}'>`);
+            $(`.p-size-${currentMatches[i]}`).text(storedPetData.size);
+            $(`.li-${currentMatches[i]}`).append(`<p class='data-age p-age-${currentMatches[i]}'>`);
+            $(`.p-age-${currentMatches[i]}`).text(storedPetData.age);
+            /*$(`.li-${currentMatches[i]}`).append(`<a class='secondary-content a-${currentMatches[i]}' href='#!'>`);
+            $(`.a-${currentMatches[i]}`).append(`<i class='material-icons cancel-icon i-${currentMatches[i]}'>`);
+            $(`.i-${currentMatches[i]}`).text("cancel")*/
 
         }
-
-
-
     })
 
+
+
+
+    //--------------------------REMOVE FROM LIST-----------------------------
+    /*$(".material-icons").on("click", function() {
+        console.log($(this).parent().attr("class").parent().attr("class") )
+    })*/
 
     //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
