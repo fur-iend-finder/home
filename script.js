@@ -146,7 +146,20 @@ $(document).ready(function() {
     //------------------------APPEND LOCAL STORAGE--------------------------------------
 
     function appendLocalStorage() {
-        $(".collection").append('<li>');
+        console.log(storedPetData.id)
+        $(".collection").append(`<li class="collection-item avatar li-${storedPetData.id}">`);
+        $(`.li-${storedPetData.id}`).append(`<img src='${storedPetData.image}' alt='${storedPetData.name}' class='circle'>`);
+        $(`.li-${storedPetData.id}`).append(`<span class="title span-${storedPetData.id}">`);
+        $(`.span-${storedPetData.id}`).text(storedPetData.name);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-breed p-breed-${storedPetData.id}'>`);
+        $(`.p-breed-${storedPetData.id}`).text(storedPetData.breed);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-size p-size-${storedPetData.id}'>`);
+        $(`.p-size-${storedPetData.id}`).text(storedPetData.size);
+        $(`.li-${storedPetData.id}`).append(`<p class='data-age p-age-${storedPetData.id}'>`);
+        $(`.p-age-${storedPetData.id}`).text(storedPetData.age);
+        $(`.li-${storedPetData.id}`).append(`<a class='secondary-content data-icon a-${storedPetData.id}' href='#!'>`);
+        $(`.a-${storedPetData.id}`).append(`<i class='material-icons i-${storedPetData.id}'>`);
+        $(`.i-${storedPetData.id}`).text("cancel")
     }
 
 
@@ -244,6 +257,7 @@ $(document).ready(function() {
         let matchID = $(this).parent().parent().attr("data-id");
 
         let petData = {
+            "id": matchID,
             "name": name,
             "breed": breed,
             "image": image,
@@ -265,7 +279,7 @@ $(document).ready(function() {
         $("#display-pet").hide();
         $("#map").hide();
         $(".matches-list").empty();
-        $(".matches-list").append(`<ul class="collection col s12 m10 l6 offset-l3 offset-m1">` + `<li>Fuck This </li>` + `<li>Fuck This </li>` + `</ul>`)
+        $(".matches-list").append(`<ul class="collection col s12 m10 l6 offset-l3 offset-m1">`)
 
         let currentMatches = JSON.parse(localStorage.getItem("matches"))
         console.log(currentMatches);
@@ -273,33 +287,11 @@ $(document).ready(function() {
 
 
         for (var i = 0; i < currentMatches.length; i++) {
-            let storedPetData = JSON.parse(localStorage.getItem(currentMatches[i]))
+            storedPetData = JSON.parse(localStorage.getItem(currentMatches[i]))
             console.log(storedPetData);
 
-            $(".collection").empty();
-            $(".collection").append('<li>');
-            $("li").attr("class", "collection-item avatar");
-            $(".collection-item").append("<img>");
-            $("img").attr({
-                "src": storedPetData.image,
-                "alt": storedPetData.name,
-                "class": "circle",
-            })
-            $(".collection-item").append("<span>");
-            $("span").attr("class", "title").text(storedPetData.name);
-            $(".collection-item").append("<p>");
-            $("p").text(storedPetData.breed);
-            $(".collection-item").append("<p>");
-            $("p").text(storedPetData.size);
-            $(".collection-item").append("<p>");
-            $("p").text(storedPetData.age);
-            $(".collection-item").append("<a>");
-            $("a").attr({
-                "href": "#!",
-                "class": "secondary-content",
-            });
-            $(".secondary-content").append("<i>");
-            $("i").attr("class", "material-icons").text("cancel")
+            appendLocalStorage();
+
         }
 
 
