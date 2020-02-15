@@ -3,7 +3,7 @@ $(document).ready(function() {
     let queryString = "&limit=100";
     let hasPhotoArray = [];
     let currentPetIndex = 0;
-    let matchesArr = JSON.parse(localStorage.getItem("matches"));
+    let matchesArr = [];
     let storedPetData = [];
 
 
@@ -143,12 +143,6 @@ $(document).ready(function() {
         });
         return queryString;
     }
-    //------------------------APPEND LOCAL STORAGE--------------------------------------
-
-    function appendLocalStorage() {
-
-    }
-
 
 
     function getBreed() {}
@@ -244,6 +238,7 @@ $(document).ready(function() {
         let matchID = $(this).parent().parent().attr("data-id");
 
         let petData = {
+            "id": matchID,
             "name": name,
             "breed": breed,
             "image": image,
@@ -252,13 +247,8 @@ $(document).ready(function() {
         };
 
         localStorage.setItem(matchID, JSON.stringify(petData))
-            //no repeats
-        if (matchesArr.includes(matchID)) {
-            ///nothing happens
-        } else {
-            matchesArr.push(matchID);
-        }
 
+        matchesArr.push(matchID);
         localStorage.setItem("matches", JSON.stringify(matchesArr))
 
     });
@@ -292,20 +282,14 @@ $(document).ready(function() {
             $(`.p-size-${currentMatches[i]}`).text(storedPetData.size);
             $(`.li-${currentMatches[i]}`).append(`<p class='data-age p-age-${currentMatches[i]}'>`);
             $(`.p-age-${currentMatches[i]}`).text(storedPetData.age);
-            /*$(`.li-${currentMatches[i]}`).append(`<a class='secondary-content a-${currentMatches[i]}' href='#!'>`);
-            $(`.a-${currentMatches[i]}`).append(`<i class='material-icons cancel-icon i-${currentMatches[i]}'>`);
+            /*$(`.li-${currentMatches[i]}`).append(`<a class='secondary-content data-icon a-${currentMatches[i]}' href='#!'>`);
+            $(`.a-${currentMatches[i]}`).append(`<i class='material-icons i-${currentMatches[i]}'>`);
             $(`.i-${currentMatches[i]}`).text("cancel")*/
 
         }
+
     })
 
-
-
-
-    //--------------------------REMOVE FROM LIST-----------------------------
-    /*$(".material-icons").on("click", function() {
-        console.log($(this).parent().attr("class").parent().attr("class") )
-    })*/
 
     //---------------------------INITIALIZE APP-----------------------------
     $("#form-wrapper").hide();
